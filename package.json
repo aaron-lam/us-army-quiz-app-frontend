@@ -14,21 +14,18 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
-    "lint": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix"
+    "lint": "eslint . --quiet --fix"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint"
+      "pre-commit": "yarn lint && yarn test"
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint --quiet --fix"
-    ],
-    "*.{json,md,html}": [
-      "prettier --write"
+    "*.{js,jsx,ts,tsx}": [
+      "yarn lint"
     ]
   },
   "eslintConfig": {

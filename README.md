@@ -1,5 +1,7 @@
 # U.S. Army Quiz App - Frontend
 
+A web application to train U.S. Army staffs what companies they own. https://us-army-quiz.netlify.app
+
 ## Getting Started
 
 1. Clone the repo.
