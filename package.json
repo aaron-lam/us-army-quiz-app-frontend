@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint . --fix"
+    "lint": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix"
   },
   "husky": {
     "hooks": {
@@ -24,7 +24,12 @@
     }
   },
   "lint-staged": {
-    "*.js": ["yarn lint", "git add"]
+    "*.{js,ts,tsx}": [
+      "eslint --quiet --fix"
+    ],
+    "*.{json,md,html}": [
+      "prettier --write"
+    ]
   },
   "eslintConfig": {
     "extends": [
