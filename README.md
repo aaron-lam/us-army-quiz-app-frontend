@@ -6,7 +6,7 @@
 
 `git clone https://github.com/aaron-lam/us-army-quiz-app-frontend.git`
 
-2. Download Node.js if you haven't installed it. LTS version (v14.15.3 is recommend)
+2. Download Node.js if you haven't installed it. LTS version (v14.15.3) is recommended.
 
 https://nodejs.org/en/download/
 
