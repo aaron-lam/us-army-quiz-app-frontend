@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { ReactElement } from 'react';
+import QuizPage from './components/quiz-page';
 
 const App: React.FC = (): ReactElement => (
-  <div className="App">
-    <h1>Good Morning!</h1>
-  </div>
+  <QuizPage />
 );
 
 export default App;

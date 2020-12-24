@@ -24,8 +24,6 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-    'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'import/extensions': [
       'error',
@@ -37,6 +35,10 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'no-use-before-define': 'off',
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/no-array-index-key': 'off',
   },
   overrides: [
     {
