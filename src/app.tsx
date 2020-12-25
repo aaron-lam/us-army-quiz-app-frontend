@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { ReactElement } from 'react';
+import QuizPage from './pages/quiz-page';
+import AppHeader from './components/app-header';
 
 const App: React.FC = (): ReactElement => (
-  <div className="App">
-    <h1>Good Morning!</h1>
+  <div>
+    <AppHeader />
+    <QuizPage />
   </div>
 );
 
