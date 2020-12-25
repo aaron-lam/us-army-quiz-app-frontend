@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ReactElement, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
-  Button, Container, Form, Header, Radio,
+  Button, ButtonProps, Container, Form, Header, Radio,
 } from 'semantic-ui-react';
 import {
   MESSAGE_ANSWER_CORRECT,
@@ -107,7 +107,7 @@ const QuizPage: React.FC = (): ReactElement => {
     setQuestionNumber(questionNumber + 1);
   };
 
-  const onClickRadio = (event: any, { index }: any) => {
+  const onClickRadio = (event: React.MouseEvent, { index }: ButtonProps) => {
     if (!hasSubmitAnswer) {
       setIndexOfSelectedRadio(index);
       setHasChooseAnswer(true);
