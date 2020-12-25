@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { ReactElement } from 'react';
-import QuizPage from './components/quiz-page';
+import QuizPage from './pages/quiz-page';
+import AppHeader from './components/app-header';
 
 const App: React.FC = (): ReactElement => (
-  <QuizPage />
+  <div>
+    <AppHeader />
+    <QuizPage />
+  </div>
 );
 
 export default App;

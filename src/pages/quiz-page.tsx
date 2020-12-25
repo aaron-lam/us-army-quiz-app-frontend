@@ -1,16 +1,37 @@
 import * as React from 'react';
 import { ReactElement, useState } from 'react';
+import { toast } from 'react-toastify';
 import {
   Button, Container, Form, Header, Radio,
 } from 'semantic-ui-react';
-import { toast, ToastOptions } from 'react-toastify';
+import {
+  MESSAGE_ANSWER_CORRECT,
+  MESSAGE_ANSWER_WRONG,
+  BUTTON_END_QUIZ_TEXT,
+  BUTTON_NEXT_TEXT,
+  BUTTON_SKIP_TEXT,
+  BUTTON_SUBMIT_TEXT,
+  TOAST_SKIP_QUESTION,
+  LEVEL,
+  SCORE,
+  toastConfig,
+  BUTTON_DISABLE_CLASS_NAME,
+  BUTTON_ENABLE_CLASS_NAME,
+  RADIO_CORRECT_COLOR,
+  RADIO_WRONG_COLOR,
+  QUESTION,
+  BUTTON_END_QUIZ_COLOR,
+  FOOTER_MARGIN,
+  BUTTON_WIDTH_DEFAULT,
+  FONT_SIZE_MEDIUM,
+} from '../contants';
 
 const styles = {
   containerFlex: {
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    height: '100vh',
+    height: '80vh',
   },
   containerHeader: {
     flex: '1',
@@ -18,19 +39,20 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '100%',
-    fontSize: '1.17em',
+    fontSize: FONT_SIZE_MEDIUM,
+    fontWeight: 'bold',
   },
   containerQuiz: {
-    flex: '8',
+    flex: '3',
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
   },
   containerFooter: {
+    flex: '1',
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
-    flex: '2',
   },
   containerButtons: {
     display: 'flex',
@@ -42,20 +64,30 @@ const styles = {
     textAlign: 'left',
     width: '100%',
   },
+  buttonWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   button: {
-    width: 100,
+    width: BUTTON_WIDTH_DEFAULT,
   },
 };
 
 const QuizPage: React.FC = (): ReactElement => {
+  /**
+   * Normally this should be passed from props. This will be removed once we connected with other components..
+   */
   const props = {
-    level: 1,
+    levelOfDifficulty: 1,
   };
 
+  /**
+   * This mock data will be removed once the API endpoint is built.
+   */
   const requestData = {
     question: 'Which company belongs to 31st Engineer Battalion?',
     choices: ['Smoking Aces', 'Dawgs', 'Cobras', 'Easy Company'],
-    indexOfCorrectAnswer: 2,
+    correctChoiceIndex: 2,
   };
 
   const [score, setScore] = useState(0);
@@ -64,16 +96,9 @@ const QuizPage: React.FC = (): ReactElement => {
   const [hasChooseAnswer, setHasChooseAnswer] = useState(false);
   const [hasSubmitAnswer, setHasSubmitAnswer] = useState(false);
 
-  const isCorrectAnswer = (index: number) => index === requestData.indexOfCorrectAnswer;
+  const isCorrectAnswer = (indexOfRadio: number) => indexOfRadio === requestData.correctChoiceIndex;
 
-  const getRadioResultColor = (index: number) => (isCorrectAnswer(index) ? 'green' : 'red');
-
-  const onClickRadio = (event: any, { index }: any) => {
-    if (!hasSubmitAnswer) {
-      setIndexOfSelectedRadio(index);
-      setHasChooseAnswer(true);
-    }
-  };
+  const getRadioResultColor = (index: number) => (isCorrectAnswer(index) ? RADIO_CORRECT_COLOR : RADIO_WRONG_COLOR);
 
   const goToNextQuestion = () => {
     setIndexOfSelectedRadio(-1);
@@ -82,20 +107,17 @@ const QuizPage: React.FC = (): ReactElement => {
     setQuestionNumber(questionNumber + 1);
   };
 
-  const toastConfig: ToastOptions = {
-    position: 'bottom-center',
-    autoClose: 2000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: false,
-    progress: undefined,
+  const onClickRadio = (event: any, { index }: any) => {
+    if (!hasSubmitAnswer) {
+      setIndexOfSelectedRadio(index);
+      setHasChooseAnswer(true);
+    }
   };
 
   const onClickSkip = () => {
     if (!hasSubmitAnswer) {
       setScore(score - 1);
-      toast.warn('Skipped the question. Score -1', toastConfig);
+      toast.warn(TOAST_SKIP_QUESTION, toastConfig);
       goToNextQuestion();
     }
   };
@@ -109,27 +131,30 @@ const QuizPage: React.FC = (): ReactElement => {
     }
   };
 
-  const { level } = props;
+  const { levelOfDifficulty } = props;
 
   return (
     <Container>
+      {/* Quiz Header */}
+      <div style={styles.containerHeader as React.CSSProperties}>
+        <div>{`${LEVEL} ${levelOfDifficulty}`}</div>
+        <div>{`${SCORE} ${score}`}</div>
+      </div>
       <div style={styles.containerFlex as React.CSSProperties}>
-        <div style={styles.containerHeader}>
-          <div>{`Level ${level}`}</div>
-          <div>{`Score: ${score}`}</div>
-        </div>
         <div style={styles.containerQuiz as React.CSSProperties}>
-          <Header as="h3">{`Question ${questionNumber}: ${requestData.question}`}</Header>
-          <Header as="h3" style={{ textAlign: 'center', visibility: hasSubmitAnswer ? 'visible' : 'hidden' }}>
-            {`${isCorrectAnswer(indexOfSelectedRadio) ? 'Awesome!' : 'Oops. That\'s incorrect!'}`}
+          {/* Quiz Question */}
+          <Header>{`${QUESTION} ${questionNumber}: ${requestData.question}`}</Header>
+          <Header style={{ textAlign: 'center', visibility: hasSubmitAnswer ? 'visible' : 'hidden' }}>
+            {`${isCorrectAnswer(indexOfSelectedRadio) ? MESSAGE_ANSWER_CORRECT : MESSAGE_ANSWER_WRONG}`}
           </Header>
+          {/* Quiz Multiple Choice */}
           <Form>
             {requestData.choices.map((choice, index) => (
               <Form.Field key={index}>
                 <Button
                   style={styles.radio}
                   index={index}
-                  className={`basic ${hasSubmitAnswer ? getRadioResultColor(index) : ''}`}
+                  className={`${hasSubmitAnswer ? getRadioResultColor(index) : ''}`}
                   onClick={onClickRadio}
                 >
                   <Radio
@@ -141,21 +166,27 @@ const QuizPage: React.FC = (): ReactElement => {
             ))}
           </Form>
         </div>
+        {/* Quiz Buttons */}
         <div style={styles.containerFooter as React.CSSProperties}>
           <div style={styles.containerButtons}>
-            <Button secondary style={styles.button}>Previous</Button>
-            <Button basic style={styles.button} onClick={onClickSkip}>
-              Skip
+            <Button
+              className={(hasSubmitAnswer ? BUTTON_DISABLE_CLASS_NAME : BUTTON_ENABLE_CLASS_NAME)}
+              style={styles.button}
+              onClick={onClickSkip}
+            >
+              {BUTTON_SKIP_TEXT}
             </Button>
             <Button
               style={styles.button}
-              className={(hasChooseAnswer ? 'primary' : 'basic')}
+              className={(hasChooseAnswer ? BUTTON_ENABLE_CLASS_NAME : BUTTON_DISABLE_CLASS_NAME)}
               onClick={onClickSubmit}
             >
-              {hasSubmitAnswer ? 'Next' : 'Submit'}
+              {hasSubmitAnswer ? BUTTON_NEXT_TEXT : BUTTON_SUBMIT_TEXT}
             </Button>
           </div>
-          <Button style={{ margin: '0 0 20px' }} color="green">End the Quiz</Button>
+          <Button basic color={BUTTON_END_QUIZ_COLOR}>{BUTTON_END_QUIZ_TEXT}</Button>
+          {/* Give some margins to footer */}
+          <div style={{ margin: FOOTER_MARGIN }} />
         </div>
       </div>
     </Container>

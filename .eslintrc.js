@@ -36,6 +36,7 @@ module.exports = {
       },
     ],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'max-len': ['error', { code: 120 }],
     'no-use-before-define': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/no-array-index-key': 'off',
