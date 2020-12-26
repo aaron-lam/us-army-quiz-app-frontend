@@ -14,7 +14,11 @@ export const toastConfig: ToastOptions = {
  * Global
  */
 export const BUTTON_WIDTH_DEFAULT = 100;
-export const FONT_SIZE_MEDIUM = 18;
+export const FONT_SIZE_MEDIUM = 20;
+export const FONT_SIZE_LARGE = 24;
+export const PRIMARY_COLOR = 'green';
+export const PATH_QUIZ = '/quiz/';
+export const PATH_INSTRUCTIONS = '/instructions/';
 
 /**
  * App Header
@@ -22,6 +26,24 @@ export const FONT_SIZE_MEDIUM = 18;
 export const APP_HEADER = 'U.S. Army Units Quiz';
 export const ARMY_LOGO_URL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/'
   + 'Logo_of_the_United_States_Army.svg/359px-Logo_of_the_United_States_Army.svg.png';
+
+/**
+ * Quiz Selections Page
+ */
+export const QUIZ_SELECTIONS_CARD_DESCRIPTION = 'Guess which company belongs to the corresponding';
+
+/**
+ * Quiz Instructions Page
+ */
+export const QUIZ_INSTRUCTION_PARAGRAPH_ONE = 'There is unlimited question in total. '
+  + 'Your goal is to get as much score as possible. '
+  + 'You need to guess which company belongs to the corresponding';
+export const QUIZ_INSTRUCTION_PARAGRAPH_TWO = 'You get 1 point when you answer a question correctly. '
+  + 'If you skip a question or answer a question incorrectly, 1 point will be deducted. '
+  + 'There are unlimited question in the quiz. '
+  + 'Feel free to press “End Quiz” to finish the quiz when you finished.';
+export const QUIZ_INSTRUCTION_PARAGRAPH_THREE = 'Press the “Start” button to begin now!';
+export const MARGIN_BETWEEN_PARAGRAPH = 28;
 
 /**
  * Quiz Page

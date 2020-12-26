@@ -2,8 +2,10 @@ import * as React from 'react';
 import { ReactElement, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
-  Button, ButtonProps, Container, Form, Header, Radio,
+  Button, ButtonProps, Form, Header, Radio,
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import {
   MESSAGE_ANSWER_CORRECT,
   MESSAGE_ANSWER_WRONG,
@@ -24,54 +26,50 @@ import {
   FOOTER_MARGIN,
   BUTTON_WIDTH_DEFAULT,
   FONT_SIZE_MEDIUM,
+  PATH_QUIZ,
 } from '../contants';
 
-const styles = {
-  containerFlex: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexDirection: 'column',
-    height: '80vh',
-  },
-  containerHeader: {
-    flex: '1',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    height: '100%',
-    fontSize: FONT_SIZE_MEDIUM,
-    fontWeight: 'bold',
-  },
-  containerQuiz: {
-    flex: '3',
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'column',
-  },
-  containerFooter: {
-    flex: '1',
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'column',
-  },
-  containerButtons: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    height: '100%',
-  },
-  radio: {
-    textAlign: 'left',
-    width: '100%',
-  },
-  buttonWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  button: {
-    width: BUTTON_WIDTH_DEFAULT,
-  },
-};
+const HeaderContainer = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  font-size: ${FONT_SIZE_MEDIUM}px;
+  font-weight: bold;
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 80vh;
+`;
+
+const QuizContainer = styled.div`
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const FooterContainer = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+`;
+
+const MediumButton = styled(Button)({
+  width: BUTTON_WIDTH_DEFAULT,
+});
 
 const QuizPage: React.FC = (): ReactElement => {
   /**
@@ -134,14 +132,14 @@ const QuizPage: React.FC = (): ReactElement => {
   const { levelOfDifficulty } = props;
 
   return (
-    <Container>
+    <div>
       {/* Quiz Header */}
-      <div style={styles.containerHeader as React.CSSProperties}>
+      <HeaderContainer>
         <div>{`${LEVEL} ${levelOfDifficulty}`}</div>
         <div>{`${SCORE} ${score}`}</div>
-      </div>
-      <div style={styles.containerFlex as React.CSSProperties}>
-        <div style={styles.containerQuiz as React.CSSProperties}>
+      </HeaderContainer>
+      <FlexContainer>
+        <QuizContainer>
           {/* Quiz Question */}
           <Header>{`${QUESTION} ${questionNumber}: ${requestData.question}`}</Header>
           <Header style={{ textAlign: 'center', visibility: hasSubmitAnswer ? 'visible' : 'hidden' }}>
@@ -152,7 +150,7 @@ const QuizPage: React.FC = (): ReactElement => {
             {requestData.choices.map((choice, index) => (
               <Form.Field key={index}>
                 <Button
-                  style={styles.radio}
+                  style={{ textAlign: 'left', width: '100%' }}
                   index={index}
                   className={`${hasSubmitAnswer ? getRadioResultColor(index) : ''}`}
                   onClick={onClickRadio}
@@ -165,31 +163,32 @@ const QuizPage: React.FC = (): ReactElement => {
               </Form.Field>
             ))}
           </Form>
-        </div>
+        </QuizContainer>
         {/* Quiz Buttons */}
-        <div style={styles.containerFooter as React.CSSProperties}>
-          <div style={styles.containerButtons}>
-            <Button
+        <FooterContainer>
+          <ButtonsContainer>
+            <MediumButton
               className={(hasSubmitAnswer ? BUTTON_DISABLE_CLASS_NAME : BUTTON_ENABLE_CLASS_NAME)}
-              style={styles.button}
               onClick={onClickSkip}
             >
               {BUTTON_SKIP_TEXT}
-            </Button>
-            <Button
-              style={styles.button}
+            </MediumButton>
+            <MediumButton
               className={(hasChooseAnswer ? BUTTON_ENABLE_CLASS_NAME : BUTTON_DISABLE_CLASS_NAME)}
               onClick={onClickSubmit}
             >
               {hasSubmitAnswer ? BUTTON_NEXT_TEXT : BUTTON_SUBMIT_TEXT}
-            </Button>
-          </div>
-          <Button basic color={BUTTON_END_QUIZ_COLOR}>{BUTTON_END_QUIZ_TEXT}</Button>
+            </MediumButton>
+          </ButtonsContainer>
+          {/* TODO: Should navigate to user statistic page instead of quiz selections page. */}
+          <Button as={Link} to={PATH_QUIZ} basic color={BUTTON_END_QUIZ_COLOR}>
+            {BUTTON_END_QUIZ_TEXT}
+          </Button>
           {/* Give some margins to footer */}
           <div style={{ margin: FOOTER_MARGIN }} />
-        </div>
-      </div>
-    </Container>
+        </FooterContainer>
+      </FlexContainer>
+    </div>
   );
 };
 
