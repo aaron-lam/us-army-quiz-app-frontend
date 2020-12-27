@@ -93,20 +93,20 @@ const QuizPage: React.FC = (): ReactElement => {
   }, []);
 
   const [score, setScore] = useState(0);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [indexOfSelectedRadio, setIndexOfSelectedRadio] = useState(-1);
   const [hasChooseAnswer, setHasChooseAnswer] = useState(false);
   const [hasSubmitAnswer, setHasSubmitAnswer] = useState(false);
 
+  const getCurrentQuestion = () => requestData[requestData.length - 1];
+
   const isCorrectAnswer = (indexOfRadio: number) => indexOfRadio
-    === requestData[currentQuestionIndex].correctChoiceIndex;
+    === getCurrentQuestion().correctChoiceIndex;
 
   const getRadioResultColor = (index: number) => (isCorrectAnswer(index) ? RADIO_CORRECT_COLOR : RADIO_WRONG_COLOR);
 
   const incrementQuestion = () => {
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
-    if (currentQuestionIndex === requestData.length - 5) {
+    if (requestData.length <= 5) {
       requestData.concat(MOCK_DATA_QUESTIONS);
     }
   };
@@ -155,13 +155,13 @@ const QuizPage: React.FC = (): ReactElement => {
       <FlexContainer>
         <QuizContainer>
           {/* Quiz Question */}
-          <Header>{`${QUESTION} ${questionNumber}: ${requestData[currentQuestionIndex].question}`}</Header>
+          <Header>{`${QUESTION} ${questionNumber}: ${getCurrentQuestion().question}`}</Header>
           <Header style={{ textAlign: 'center', visibility: hasSubmitAnswer ? 'visible' : 'hidden' }}>
             {`${isCorrectAnswer(indexOfSelectedRadio) ? MESSAGE_ANSWER_CORRECT : MESSAGE_ANSWER_WRONG}`}
           </Header>
           {/* Quiz Multiple Choice */}
           <Form>
-            {requestData[currentQuestionIndex].choices.map((choice, index) => (
+            {getCurrentQuestion().choices.map((choice, index) => (
               <Form.Field key={index}>
                 <Button
                   style={{ textAlign: 'left', width: '100%' }}
