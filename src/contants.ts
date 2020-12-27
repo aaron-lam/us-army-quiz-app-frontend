@@ -52,6 +52,7 @@ export const MARGIN_BETWEEN_PARAGRAPH = 28;
 export const LEVEL = 'Level';
 export const SCORE = 'Score:';
 export const QUESTION = 'Question';
+export const MINIMUM_QUESTION_CAPACITY = 5;
 export const RADIO_CORRECT_COLOR = 'green';
 export const RADIO_WRONG_COLOR = 'red';
 export const BUTTON_ENABLE_CLASS_NAME = 'primary';

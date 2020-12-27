@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import {
   Button, ButtonProps, Form, Header, Radio,
 } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   MESSAGE_ANSWER_CORRECT,
@@ -27,7 +27,7 @@ import {
   BUTTON_WIDTH_DEFAULT,
   FONT_SIZE_MEDIUM,
   PATH_QUIZ,
-  MOCK_DATA_QUESTIONS,
+  MOCK_DATA_QUESTIONS, MINIMUM_QUESTION_CAPACITY,
 } from '../contants';
 
 const HeaderContainer = styled.div`
@@ -79,13 +79,6 @@ type QuestionInfo = {
 }
 
 const QuizPage: React.FC = (): ReactElement => {
-  /**
-   * Normally this should be passed from props. This will be removed once we connected with other components..
-   */
-  const props = {
-    levelOfDifficulty: 1,
-  };
-
   const requestData: QuestionInfo[] = MOCK_DATA_QUESTIONS;
 
   useEffect(() => {
@@ -98,6 +91,8 @@ const QuizPage: React.FC = (): ReactElement => {
   const [hasChooseAnswer, setHasChooseAnswer] = useState(false);
   const [hasSubmitAnswer, setHasSubmitAnswer] = useState(false);
 
+  const { armyUnitsQuizType }: { armyUnitsQuizType: string } = useParams();
+
   const getCurrentQuestion = () => requestData[requestData.length - 1];
 
   const isCorrectAnswer = (indexOfRadio: number) => indexOfRadio
@@ -106,7 +101,8 @@ const QuizPage: React.FC = (): ReactElement => {
   const getRadioResultColor = (index: number) => (isCorrectAnswer(index) ? RADIO_CORRECT_COLOR : RADIO_WRONG_COLOR);
 
   const incrementQuestion = () => {
-    if (requestData.length <= 5) {
+    requestData.pop();
+    if (requestData.length <= MINIMUM_QUESTION_CAPACITY) {
       requestData.concat(MOCK_DATA_QUESTIONS);
     }
   };
@@ -143,13 +139,11 @@ const QuizPage: React.FC = (): ReactElement => {
     }
   };
 
-  const { levelOfDifficulty } = props;
-
   return (
     <div>
       {/* Quiz Header */}
       <HeaderContainer>
-        <div>{`${LEVEL} ${levelOfDifficulty}`}</div>
+        <div>{`${LEVEL} ${armyUnitsQuizType === 'battalion' ? 1 : 2}`}</div>
         <div>{`${SCORE} ${score}`}</div>
       </HeaderContainer>
       <FlexContainer>
