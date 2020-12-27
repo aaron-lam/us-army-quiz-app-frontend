@@ -19,6 +19,7 @@ export const FONT_SIZE_LARGE = 24;
 export const PRIMARY_COLOR = 'green';
 export const PATH_QUIZ = '/quiz/';
 export const PATH_INSTRUCTIONS = '/instructions/';
+export const API_URL = 'http://backend-env.eba-vppruamm.us-west-2.elasticbeanstalk.com';
 
 /**
  * App Header
@@ -64,3 +65,205 @@ export const MESSAGE_ANSWER_CORRECT = 'Awesome! Score +1';
 export const MESSAGE_ANSWER_WRONG = 'That\'s incorrect.. Score -1';
 export const TOAST_SKIP_QUESTION = 'Skipped the question. Score -1';
 export const FOOTER_MARGIN = 12;
+export const MOCK_DATA_QUESTIONS = [
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: 'Which of the following companies belong to 382nd CSSB',
+    choices: [
+      '1',
+      '2',
+      '3',
+      '4',
+    ],
+    correctChoiceIndex: 0,
+  },
+];
