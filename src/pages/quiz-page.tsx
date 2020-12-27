@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import {
   Button, ButtonProps, Form, Header, Radio,
 } from 'semantic-ui-react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   MESSAGE_ANSWER_CORRECT,
@@ -26,7 +26,8 @@ import {
   FOOTER_MARGIN,
   BUTTON_WIDTH_DEFAULT,
   FONT_SIZE_MEDIUM,
-  PATH_QUIZ, API_URL, MOCK_DATA_QUESTIONS,
+  PATH_QUIZ,
+  MOCK_DATA_QUESTIONS,
 } from '../contants';
 
 const HeaderContainer = styled.div`
@@ -71,6 +72,12 @@ const MediumButton = styled(Button)({
   width: BUTTON_WIDTH_DEFAULT,
 });
 
+type QuestionInfo = {
+  question: string,
+  choices: string[],
+  correctChoiceIndex: number
+}
+
 const QuizPage: React.FC = (): ReactElement => {
   /**
    * Normally this should be passed from props. This will be removed once we connected with other components..
@@ -79,16 +86,7 @@ const QuizPage: React.FC = (): ReactElement => {
     levelOfDifficulty: 1,
   };
 
-  // /**
-  //  * This mock data will be removed once the API endpoint is built.
-  //  */
-  // const requestData = {
-  //   question: 'Which company belongs to 31st Engineer Battalion?',
-  //   choices: ['Smoking Aces', 'Dawgs', 'Cobras', 'Easy Company'],
-  //   correctChoiceIndex: 2,
-  // };
-
-  const requestData: any[] = MOCK_DATA_QUESTIONS;
+  const requestData: QuestionInfo[] = MOCK_DATA_QUESTIONS;
 
   useEffect(() => {
     requestData.concat(MOCK_DATA_QUESTIONS);
@@ -163,7 +161,7 @@ const QuizPage: React.FC = (): ReactElement => {
           </Header>
           {/* Quiz Multiple Choice */}
           <Form>
-            {requestData[currentQuestionIndex].choices.map((choice: any, index: any) => (
+            {requestData[currentQuestionIndex].choices.map((choice, index) => (
               <Form.Field key={index}>
                 <Button
                   style={{ textAlign: 'left', width: '100%' }}
