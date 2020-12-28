@@ -30,7 +30,7 @@
     "build": "craco build",
     "test": "craco test --coverage --watchAll=false",
     "eject": "craco eject",
-    "lint": "eslint . --fix --max-warnings=0"
+    "lint": "eslint . --fix"
   },
   "husky": {
     "hooks": {

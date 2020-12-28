@@ -36,6 +36,7 @@ module.exports = {
       },
     ],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'jsx-a11y/label-has-associated-control': 'off',
     'max-len': ['error', { code: 120 }],
     'no-use-before-define': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
