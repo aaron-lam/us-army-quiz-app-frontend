@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ReactElement, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
-  Button, ButtonProps, Form, Header, Radio,
+  Button, ButtonProps, Form, Header, Loader, Radio,
 } from 'semantic-ui-react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -27,7 +27,9 @@ import {
   BUTTON_WIDTH_DEFAULT,
   FONT_SIZE_MEDIUM,
   PATH_QUIZ,
-  MOCK_DATA_QUESTIONS, MINIMUM_QUESTION_CAPACITY,
+  MINIMUM_QUESTION_CAPACITY,
+  API_URL,
+  LOCAL_STORAGE_UNIT_ID_KEY, NUM_OF_QUESTIONS_TO_FETCH,
 } from '../contants';
 
 const HeaderContainer = styled.div`
@@ -79,31 +81,44 @@ type QuestionInfo = {
 }
 
 const QuizPage: React.FC = (): ReactElement => {
-  const requestData: QuestionInfo[] = MOCK_DATA_QUESTIONS;
-
-  useEffect(() => {
-    requestData.concat(MOCK_DATA_QUESTIONS);
-  }, []);
-
-  const [score, setScore] = useState(0);
-  const [questionNumber, setQuestionNumber] = useState(1);
-  const [indexOfSelectedRadio, setIndexOfSelectedRadio] = useState(-1);
-  const [hasChooseAnswer, setHasChooseAnswer] = useState(false);
-  const [hasSubmitAnswer, setHasSubmitAnswer] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [score, setScore] = useState<number>(0);
+  const [questionNumber, setQuestionNumber] = useState<number>(1);
+  const [indexOfSelectedRadio, setIndexOfSelectedRadio] = useState<number>(-1);
+  const [hasChooseAnswer, setHasChooseAnswer] = useState<boolean>(false);
+  const [hasSubmitAnswer, setHasSubmitAnswer] = useState<boolean>(false);
+  const [requestData, setRequestData] = useState<QuestionInfo[]>([]);
 
   const { armyUnitsQuizType }: { armyUnitsQuizType: string } = useParams();
 
+  const questionsFetchURL = `${API_URL}/questions?${new URLSearchParams({
+    unitId: localStorage.getItem(LOCAL_STORAGE_UNIT_ID_KEY) || '1',
+    questionType: armyUnitsQuizType,
+    questionCounts: NUM_OF_QUESTIONS_TO_FETCH.toString(),
+  })}`;
+
+  const fetchQuestions = () => {
+    fetch(questionsFetchURL)
+      .then((response) => response.json())
+      .then((data) => {
+        setRequestData(requestData.concat(data));
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => fetchQuestions(), []);
+
   const getCurrentQuestion = () => requestData[requestData.length - 1];
 
-  const isCorrectAnswer = (indexOfRadio: number) => indexOfRadio
-    === getCurrentQuestion().correctChoiceIndex;
+  const isCorrectAnswer = (indexOfRadio: number) => indexOfRadio === getCurrentQuestion().correctChoiceIndex;
 
   const getRadioResultColor = (index: number) => (isCorrectAnswer(index) ? RADIO_CORRECT_COLOR : RADIO_WRONG_COLOR);
 
   const incrementQuestion = () => {
+    setQuestionNumber(questionNumber + 1);
     requestData.pop();
     if (requestData.length <= MINIMUM_QUESTION_CAPACITY) {
-      requestData.concat(MOCK_DATA_QUESTIONS);
+      fetchQuestions();
     }
   };
 
@@ -111,7 +126,6 @@ const QuizPage: React.FC = (): ReactElement => {
     setIndexOfSelectedRadio(-1);
     setHasChooseAnswer(false);
     setHasSubmitAnswer(false);
-    setQuestionNumber(questionNumber + 1);
     incrementQuestion();
   };
 
@@ -139,6 +153,11 @@ const QuizPage: React.FC = (): ReactElement => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <Loader size="massive" active />
+    );
+  }
   return (
     <div>
       {/* Quiz Header */}
@@ -150,7 +169,9 @@ const QuizPage: React.FC = (): ReactElement => {
         <QuizContainer>
           {/* Quiz Question */}
           <Header>{`${QUESTION} ${questionNumber}: ${getCurrentQuestion().question}`}</Header>
-          <Header style={{ textAlign: 'center', visibility: hasSubmitAnswer ? 'visible' : 'hidden' }}>
+          <Header
+            style={{ textAlign: 'center', visibility: hasSubmitAnswer ? 'visible' : 'hidden' }}
+          >
             {`${isCorrectAnswer(indexOfSelectedRadio) ? MESSAGE_ANSWER_CORRECT : MESSAGE_ANSWER_WRONG}`}
           </Header>
           {/* Quiz Multiple Choice */}
