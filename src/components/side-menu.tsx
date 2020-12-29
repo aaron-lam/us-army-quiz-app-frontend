@@ -12,6 +12,10 @@ import {
 const SideMenu: React.FC = (): ReactElement => {
   const { isSideMenuVisible, setIsSideMenuVisible } = useContext(IsSideMenuVisibleContext);
 
+  const closeSideMenu = () => {
+    setIsSideMenuVisible(false);
+  };
+
   return (
     <Sidebar
       as={Menu}
@@ -27,6 +31,7 @@ const SideMenu: React.FC = (): ReactElement => {
       <Menu.Item
         as={Link}
         to={PATH_PROFILE}
+        onClick={closeSideMenu}
       >
         <Icon name="user circle" />
         {SIDE_MENU_PROFILE_TITLE}
@@ -34,6 +39,7 @@ const SideMenu: React.FC = (): ReactElement => {
       <Menu.Item
         as={Link}
         to={PATH_QUIZ}
+        onClick={closeSideMenu}
       >
         <Icon name="question circle outline" />
         {SIDE_MENU_QUIZ_TITLE}

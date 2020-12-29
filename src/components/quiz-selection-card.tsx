@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import {
   FONT_SIZE_LARGE,
   FONT_SIZE_MEDIUM,
-  LEVEL, PATH_INSTRUCTIONS, PATH_QUIZ, PRIMARY_COLOR, QUIZ_SELECTIONS_CARD_DESCRIPTION,
+  LEVEL_LABEL, PATH_INSTRUCTIONS, PATH_QUIZ, PRIMARY_COLOR, QUIZ_SELECTIONS_CARD_DESCRIPTION,
 } from '../contants';
 
 type QuizSelectionCardProps = {
@@ -17,7 +17,7 @@ const QuizSelectionCard: React.FC<QuizSelectionCardProps> = ({ level, armyUnitQu
   <Card as={Link} to={PATH_QUIZ + armyUnitQuizType + PATH_INSTRUCTIONS} fluid color={PRIMARY_COLOR}>
     <Card.Content>
       <Card.Header style={{ fontSize: FONT_SIZE_LARGE }}>
-        {`${LEVEL} ${level}`}
+        {`${LEVEL_LABEL} ${level}`}
       </Card.Header>
       <Card.Description style={{ fontSize: FONT_SIZE_MEDIUM }}>
         {QUIZ_SELECTIONS_CARD_DESCRIPTION}
