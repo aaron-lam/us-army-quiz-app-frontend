@@ -19,6 +19,11 @@ export const FONT_SIZE_LARGE = 24;
 export const PRIMARY_COLOR = 'green';
 export const PATH_QUIZ = '/quiz/';
 export const PATH_INSTRUCTIONS = '/instructions/';
+export const API_URL = 'http://backend-env.eba-vppruamm.us-west-2.elasticbeanstalk.com';
+export const API_URL_PATH_UNITS = '/units/';
+export const LOCAL_STORAGE_LAST_NAME_KEY = 'unitId';
+export const LOCAL_STORAGE_UNIT_ID_KEY = 'unit';
+export const LOCAL_STORAGE_UNIT_KEY = 'lastName';
 
 /**
  * App Header
@@ -26,6 +31,13 @@ export const PATH_INSTRUCTIONS = '/instructions/';
 export const APP_HEADER = 'U.S. Army Units Quiz';
 export const ARMY_LOGO_URL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/'
   + 'Logo_of_the_United_States_Army.svg/359px-Logo_of_the_United_States_Army.svg.png';
+
+/**
+ * Quiz User Info Form
+ */
+export const USER_FORM_DESCRIPTION = 'Welcome! Before playing our quiz, please fill out the form below:';
+export const PLACEHOLDER_LAST_NAME = 'Please enter your Last Name';
+export const PLACEHOLDER_DROP_DOWN = 'Please enter your unit: ';
 
 /**
  * Quiz Selections Page
