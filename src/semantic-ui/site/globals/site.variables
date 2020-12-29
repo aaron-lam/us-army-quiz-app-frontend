@@ -2,8 +2,8 @@
      User Global Variables
 *******************************/
 
-@primaryColor: #21BA45;
+@primaryColor: #228B22;
 @secondaryColor: #F0E68C;
 @pageBackground: #FFFFF0;
 @red: #FC9B86;
-@green: #82E0AA;
+@green: #228B22;

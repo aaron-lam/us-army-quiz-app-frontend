@@ -19,6 +19,11 @@ export const FONT_SIZE_LARGE = 24;
 export const PRIMARY_COLOR = 'green';
 export const PATH_QUIZ = '/quiz/';
 export const PATH_INSTRUCTIONS = '/instructions/';
+export const API_URL = 'https://5663fc6c72ae.ngrok.io';
+export const API_URL_PATH_UNITS = '/units/';
+export const LOCAL_STORAGE_LAST_NAME_KEY = 'unitId';
+export const LOCAL_STORAGE_UNIT_ID_KEY = 'unit';
+export const LOCAL_STORAGE_UNIT_KEY = 'lastName';
 
 /**
  * App Header
@@ -26,6 +31,13 @@ export const PATH_INSTRUCTIONS = '/instructions/';
 export const APP_HEADER = 'U.S. Army Units Quiz';
 export const ARMY_LOGO_URL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/'
   + 'Logo_of_the_United_States_Army.svg/359px-Logo_of_the_United_States_Army.svg.png';
+
+/**
+ * Quiz User Info Form
+ */
+export const USER_FORM_DESCRIPTION = 'Welcome! Before playing our quiz, please fill out the form below:';
+export const PLACEHOLDER_LAST_NAME = 'Please enter your Last Name';
+export const PLACEHOLDER_DROP_DOWN = 'Please enter your unit: ';
 
 /**
  * Quiz Selections Page
@@ -51,6 +63,8 @@ export const MARGIN_BETWEEN_PARAGRAPH = 28;
 export const LEVEL = 'Level';
 export const SCORE = 'Score:';
 export const QUESTION = 'Question';
+export const NUM_OF_QUESTIONS_TO_FETCH = 20;
+export const MINIMUM_QUESTION_CAPACITY = 5;
 export const RADIO_CORRECT_COLOR = 'green';
 export const RADIO_WRONG_COLOR = 'red';
 export const BUTTON_ENABLE_CLASS_NAME = 'primary';
@@ -58,7 +72,7 @@ export const BUTTON_DISABLE_CLASS_NAME = 'basic';
 export const BUTTON_SKIP_TEXT = 'Skip';
 export const BUTTON_SUBMIT_TEXT = 'Submit';
 export const BUTTON_NEXT_TEXT = 'Next';
-export const BUTTON_END_QUIZ_TEXT = 'End Quiz';
+export const BUTTON_END_QUIZ_TEXT = 'End the Quiz. View Score Report Now!';
 export const BUTTON_END_QUIZ_COLOR = 'grey';
 export const MESSAGE_ANSWER_CORRECT = 'Awesome! Score +1';
 export const MESSAGE_ANSWER_WRONG = 'That\'s incorrect.. Score -1';
