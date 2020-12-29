@@ -30,6 +30,7 @@ export const LOCAL_STORAGE_UNIT_KEY = 'unit';
  * Side Menu
  */
 export const SIDE_MENU_PROFILE_TITLE = 'Profile';
+export const SIDE_MENU_QUIZ_TITLE = 'Quiz';
 
 /**
  * App Header
@@ -74,7 +75,6 @@ export const MINIMUM_QUESTION_CAPACITY = 5;
 export const RADIO_CORRECT_COLOR = 'green';
 export const RADIO_WRONG_COLOR = 'red';
 export const BUTTON_ENABLE_CLASS_NAME = 'primary';
-export const BUTTON_DISABLE_CLASS_NAME = 'basic';
 export const BUTTON_SKIP_TEXT = 'Skip';
 export const BUTTON_SUBMIT_TEXT = 'Submit';
 export const BUTTON_NEXT_TEXT = 'Next';
