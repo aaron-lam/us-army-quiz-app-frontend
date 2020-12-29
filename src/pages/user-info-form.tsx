@@ -4,7 +4,7 @@ import React, {
 import {
   Button, Dropdown, Form, Header,
 } from 'semantic-ui-react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   API_URL, API_URL_PATH_UNITS, LOCAL_STORAGE_LAST_NAME_KEY,
