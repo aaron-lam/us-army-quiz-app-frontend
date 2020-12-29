@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
-  Button, ButtonProps, Form, Header, Radio,
+  Button, ButtonProps, Form, Header, Loader, Radio,
 } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   MESSAGE_ANSWER_CORRECT,
@@ -24,7 +24,12 @@ import {
   FOOTER_MARGIN,
   BUTTON_WIDTH_DEFAULT,
   FONT_SIZE_MEDIUM,
-  PATH_QUIZ, PRIMARY_COLOR,
+  PATH_QUIZ,
+  PRIMARY_COLOR,
+  MINIMUM_QUESTION_CAPACITY,
+  API_URL,
+  LOCAL_STORAGE_UNIT_ID_KEY,
+  NUM_OF_QUESTIONS_TO_FETCH,
 } from '../contants';
 
 const HeaderContainer = styled.div`
@@ -69,38 +74,59 @@ const MediumButton = styled(Button)({
   width: BUTTON_WIDTH_DEFAULT,
 });
 
+type QuestionInfo = {
+  question: string,
+  choices: string[],
+  correctChoiceIndex: number
+}
+
 const QuizPage: React.FC = (): ReactElement => {
-  /**
-   * Normally this should be passed from props. This will be removed once we connected with other components..
-   */
-  const props = {
-    levelOfDifficulty: 1,
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [score, setScore] = useState<number>(0);
+  const [questionNumber, setQuestionNumber] = useState<number>(1);
+  const [indexOfSelectedRadio, setIndexOfSelectedRadio] = useState<number>(-1);
+  const [hasChooseAnswer, setHasChooseAnswer] = useState<boolean>(false);
+  const [hasSubmitAnswer, setHasSubmitAnswer] = useState<boolean>(false);
+  const [requestData, setRequestData] = useState<QuestionInfo[]>([]);
+
+  const { armyUnitsQuizType }: { armyUnitsQuizType: string } = useParams();
+
+  const questionsFetchURL = `${API_URL}/questions?${new URLSearchParams({
+    unitId: localStorage.getItem(LOCAL_STORAGE_UNIT_ID_KEY) || '1',
+    questionType: armyUnitsQuizType,
+    questionCounts: NUM_OF_QUESTIONS_TO_FETCH.toString(),
+  })}`;
+
+  const fetchQuestions = () => {
+    fetch(questionsFetchURL)
+      .then((response) => response.json())
+      .then((data) => {
+        setRequestData(requestData.concat(data));
+        setIsLoading(false);
+      });
   };
 
-  /**
-   * This mock data will be removed once the API endpoint is built.
-   */
-  const requestData = {
-    question: 'Which company belongs to 31st Engineer Battalion?',
-    choices: ['Smoking Aces', 'Dawgs', 'Cobras', 'Easy Company'],
-    correctChoiceIndex: 2,
-  };
+  useEffect(() => fetchQuestions(), []);
 
-  const [score, setScore] = useState(0);
-  const [questionNumber, setQuestionNumber] = useState(1);
-  const [indexOfSelectedRadio, setIndexOfSelectedRadio] = useState(-1);
-  const [hasChooseAnswer, setHasChooseAnswer] = useState(false);
-  const [hasSubmitAnswer, setHasSubmitAnswer] = useState(false);
+  const getCurrentQuestion = () => requestData[requestData.length - 1];
 
-  const isCorrectAnswer = (indexOfRadio: number) => indexOfRadio === requestData.correctChoiceIndex;
+  const isCorrectAnswer = (indexOfRadio: number) => indexOfRadio === getCurrentQuestion().correctChoiceIndex;
 
   const getRadioResultColor = (index: number) => (isCorrectAnswer(index) ? RADIO_CORRECT_COLOR : RADIO_WRONG_COLOR);
+
+  const incrementQuestion = () => {
+    setQuestionNumber(questionNumber + 1);
+    requestData.pop();
+    if (requestData.length <= MINIMUM_QUESTION_CAPACITY) {
+      fetchQuestions();
+    }
+  };
 
   const goToNextQuestion = () => {
     setIndexOfSelectedRadio(-1);
     setHasChooseAnswer(false);
     setHasSubmitAnswer(false);
-    setQuestionNumber(questionNumber + 1);
+    incrementQuestion();
   };
 
   const onClickRadio = (event: React.MouseEvent, { index }: ButtonProps) => {
@@ -127,25 +153,30 @@ const QuizPage: React.FC = (): ReactElement => {
     }
   };
 
-  const { levelOfDifficulty } = props;
-
+  if (isLoading) {
+    return (
+      <Loader size="massive" active />
+    );
+  }
   return (
     <div>
       {/* Quiz Header */}
       <HeaderContainer>
-        <div>{`${LEVEL} ${levelOfDifficulty}`}</div>
+        <div>{`${LEVEL} ${armyUnitsQuizType === 'battalion' ? 1 : 2}`}</div>
         <div>{`${SCORE} ${score}`}</div>
       </HeaderContainer>
       <FlexContainer>
         <QuizContainer>
           {/* Quiz Question */}
-          <Header>{`${QUESTION} ${questionNumber}: ${requestData.question}`}</Header>
-          <Header style={{ textAlign: 'center', visibility: hasSubmitAnswer ? 'visible' : 'hidden' }}>
+          <Header>{`${QUESTION} ${questionNumber}: ${getCurrentQuestion().question}`}</Header>
+          <Header
+            style={{ textAlign: 'center', visibility: hasSubmitAnswer ? 'visible' : 'hidden' }}
+          >
             {`${isCorrectAnswer(indexOfSelectedRadio) ? MESSAGE_ANSWER_CORRECT : MESSAGE_ANSWER_WRONG}`}
           </Header>
           {/* Quiz Multiple Choice */}
           <Form>
-            {requestData.choices.map((choice, index) => (
+            {getCurrentQuestion().choices.map((choice, index) => (
               <Form.Field key={index}>
                 <Button
                   style={{ textAlign: 'left', width: '100%' }}
