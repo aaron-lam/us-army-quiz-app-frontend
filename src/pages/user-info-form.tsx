@@ -2,7 +2,7 @@ import React, {
   ChangeEvent, ReactElement, SyntheticEvent, useEffect, useState,
 } from 'react';
 import {
-  Button, Dropdown, Form, Header,
+  Button, Dropdown, DropdownProps, Form, Header,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -70,10 +70,10 @@ const UserInfoForm: React.FC = (): ReactElement => {
 
   const getUnitName = (id: number) => dropdownList.filter((unitOption) => unitOption.id === id)[0].name;
 
-  const dropdownOnChange = (event: SyntheticEvent<HTMLElement, Event>, { value }: any) => {
+  const dropdownOnChange = (event: SyntheticEvent<HTMLElement, Event>, { value }: DropdownProps) => {
     setUnit({
-      id: value,
-      name: getUnitName(value),
+      id: Number(value),
+      name: getUnitName(Number(value)),
     });
   };
 
