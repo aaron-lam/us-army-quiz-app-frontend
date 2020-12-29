@@ -8,6 +8,7 @@ import QuizPage from './pages/quiz-page';
 import AppHeader from './components/app-header';
 import QuizSelectionsPage from './pages/quiz-selections-page';
 import QuizInstructionPage from './pages/quiz-instructions-page';
+import ProfilePage from './pages/profile-page';
 
 const App: React.FC = (): ReactElement => (
   <div>
@@ -21,6 +22,7 @@ const App: React.FC = (): ReactElement => (
           <Route path="/quiz" exact component={QuizSelectionsPage} />
           <Route path="/quiz/:armyUnitsQuizType/instructions" exact component={QuizInstructionPage} />
           <Route path="/quiz/:armyUnitsQuizType" exact component={QuizPage} />
+          <Route path="/profile" exact component={ProfilePage} />
         </Switch>
       </Container>
     </BrowserRouter>
