@@ -59,6 +59,8 @@ const UserInfoForm: React.FC = (): ReactElement => {
     localStorage.setItem(LOCAL_STORAGE_LAST_NAME_KEY, lastName);
     localStorage.setItem(LOCAL_STORAGE_UNIT_ID_KEY, unit ? unit.id.toString() : '');
     localStorage.setItem(LOCAL_STORAGE_UNIT_KEY, unit ? unit.name.toString() : '');
+    // refresh to reconstruct an updated react router in App.tsx
+    window.location.reload();
   };
 
   const lastNameFieldOnChange = (event: ChangeEvent<HTMLInputElement>) => {

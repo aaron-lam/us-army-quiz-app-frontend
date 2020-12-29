@@ -27,13 +27,12 @@ const App: React.FC = (): ReactElement => (
       <Container>
         {hasFilledOutForm() ? (
           <Switch>
-            <Route path="/" exact>
+            <Route path={['/', '/user-info']} exact>
               <Redirect to="/quiz" />
             </Route>
             <Route path="/quiz" exact component={QuizSelectionsPage} />
             <Route path="/quiz/:armyUnitsQuizType/instructions" exact component={QuizInstructionPage} />
             <Route path="/quiz/:armyUnitsQuizType" exact component={QuizPage} />
-            <Route path="/user-info" exact component={UserInfoForm} />
             <Route path="/profile" exact component={ProfilePage} />
           </Switch>
         ) : (

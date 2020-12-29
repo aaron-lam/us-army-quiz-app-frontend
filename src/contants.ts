@@ -35,7 +35,7 @@ export const ARMY_LOGO_URL = 'https://upload.wikimedia.org/wikipedia/commons/thu
 /**
  * Quiz User Info Form
  */
-export const USER_FORM_DESCRIPTION = 'Welcome! Before playing our quiz, please fill out the form below:';
+export const USER_FORM_DESCRIPTION = 'Welcome! Before playing the quiz, please fill out the form below:';
 export const PLACEHOLDER_LAST_NAME = 'Please enter your Last Name';
 export const PLACEHOLDER_DROP_DOWN = 'Please enter your unit: ';
 
