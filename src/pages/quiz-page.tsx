@@ -17,8 +17,6 @@ import {
   LEVEL,
   SCORE,
   toastConfig,
-  BUTTON_DISABLE_CLASS_NAME,
-  BUTTON_ENABLE_CLASS_NAME,
   RADIO_CORRECT_COLOR,
   RADIO_WRONG_COLOR,
   QUESTION,
@@ -27,9 +25,11 @@ import {
   BUTTON_WIDTH_DEFAULT,
   FONT_SIZE_MEDIUM,
   PATH_QUIZ,
+  PRIMARY_COLOR,
   MINIMUM_QUESTION_CAPACITY,
   API_URL,
-  LOCAL_STORAGE_UNIT_ID_KEY, NUM_OF_QUESTIONS_TO_FETCH,
+  LOCAL_STORAGE_UNIT_ID_KEY,
+  NUM_OF_QUESTIONS_TO_FETCH,
 } from '../contants';
 
 const HeaderContainer = styled.div`
@@ -197,13 +197,15 @@ const QuizPage: React.FC = (): ReactElement => {
         <FooterContainer>
           <ButtonsContainer>
             <MediumButton
-              className={(hasSubmitAnswer ? BUTTON_DISABLE_CLASS_NAME : BUTTON_ENABLE_CLASS_NAME)}
+              color={PRIMARY_COLOR}
+              disabled={hasSubmitAnswer}
               onClick={onClickSkip}
             >
               {BUTTON_SKIP_TEXT}
             </MediumButton>
             <MediumButton
-              className={(hasChooseAnswer ? BUTTON_ENABLE_CLASS_NAME : BUTTON_DISABLE_CLASS_NAME)}
+              color={PRIMARY_COLOR}
+              disabled={!hasChooseAnswer}
               onClick={onClickSubmit}
             >
               {hasSubmitAnswer ? BUTTON_NEXT_TEXT : BUTTON_SUBMIT_TEXT}
