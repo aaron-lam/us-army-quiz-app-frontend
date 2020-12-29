@@ -4,6 +4,7 @@ import {
   Header, Icon, Image, Segment,
 } from 'semantic-ui-react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import { APP_HEADER, ARMY_LOGO_URL } from '../contants';
 import IsSideMenuVisibleContext from '../context';
 
@@ -23,12 +24,16 @@ const SidebarButton = styled(Button)({
 });
 
 const AppHeader: React.FC = (): ReactElement => {
+  const location = useLocation();
   const { setIsSideMenuVisible } = useContext(IsSideMenuVisibleContext);
 
   return (
     <HeaderSegment inverted>
       <Header as="h3" textAlign="center">
-        <SidebarButton onClick={() => setIsSideMenuVisible(true)}>
+        <SidebarButton
+          style={{ visibility: location.pathname.includes('user-info') ? 'hidden' : 'visible' }}
+          onClick={() => setIsSideMenuVisible(true)}
+        >
           <Icon fitted name="sidebar" />
         </SidebarButton>
         <Image

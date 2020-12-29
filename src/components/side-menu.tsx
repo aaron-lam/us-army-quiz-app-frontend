@@ -5,7 +5,9 @@ import * as React from 'react';
 import { ReactElement, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import IsSideMenuVisibleContext from '../context';
-import { PATH_PROFILE, SIDE_MENU_PROFILE_TITLE } from '../contants';
+import {
+  PATH_PROFILE, PATH_QUIZ, SIDE_MENU_PROFILE_TITLE, SIDE_MENU_QUIZ_TITLE,
+} from '../contants';
 
 const SideMenu: React.FC = (): ReactElement => {
   const { isSideMenuVisible, setIsSideMenuVisible } = useContext(IsSideMenuVisibleContext);
@@ -28,6 +30,13 @@ const SideMenu: React.FC = (): ReactElement => {
       >
         <Icon name="user circle" />
         {SIDE_MENU_PROFILE_TITLE}
+      </Menu.Item>
+      <Menu.Item
+        as={Link}
+        to={PATH_QUIZ}
+      >
+        <Icon name="question circle outline" />
+        {SIDE_MENU_QUIZ_TITLE}
       </Menu.Item>
     </Sidebar>
   );
