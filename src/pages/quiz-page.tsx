@@ -14,8 +14,8 @@ import {
   BUTTON_SKIP_TEXT,
   BUTTON_SUBMIT_TEXT,
   TOAST_SKIP_QUESTION,
-  LEVEL,
-  SCORE,
+  LEVEL_LABEL,
+  SCORE_LABEL,
   toastConfig,
   RADIO_CORRECT_COLOR,
   RADIO_WRONG_COLOR,
@@ -162,8 +162,8 @@ const QuizPage: React.FC = (): ReactElement => {
     <div>
       {/* Quiz Header */}
       <HeaderContainer>
-        <div>{`${LEVEL} ${armyUnitsQuizType === 'battalion' ? 1 : 2}`}</div>
-        <div>{`${SCORE} ${score}`}</div>
+        <div>{`${LEVEL_LABEL} ${armyUnitsQuizType === 'battalion' ? 1 : 2}`}</div>
+        <div>{`${SCORE_LABEL} ${score}`}</div>
       </HeaderContainer>
       <FlexContainer>
         <QuizContainer>

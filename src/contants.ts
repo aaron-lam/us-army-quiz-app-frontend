@@ -25,6 +25,7 @@ export const API_URL_PATH_UNITS = '/units/';
 export const LOCAL_STORAGE_LAST_NAME_KEY = 'lastName';
 export const LOCAL_STORAGE_UNIT_ID_KEY = 'unitId';
 export const LOCAL_STORAGE_UNIT_KEY = 'unit';
+export const BUTTON_DEFAULT_COLOR = 'primary';
 
 /**
  * Side Menu
@@ -40,7 +41,7 @@ export const ARMY_LOGO_URL = 'https://upload.wikimedia.org/wikipedia/commons/thu
   + 'Logo_of_the_United_States_Army.svg/359px-Logo_of_the_United_States_Army.svg.png';
 
 /**
- * Quiz User Info Form
+ * User Info Form
  */
 export const USER_FORM_DESCRIPTION = 'Welcome! Before playing the quiz, please fill out the form below:';
 export const PLACEHOLDER_LAST_NAME = 'Please enter your Last Name';
@@ -67,14 +68,13 @@ export const MARGIN_BETWEEN_PARAGRAPH = 28;
 /**
  * Quiz Page
  */
-export const LEVEL = 'Level';
-export const SCORE = 'Score:';
+export const LEVEL_LABEL = 'Level';
+export const SCORE_LABEL = 'Score:';
 export const QUESTION = 'Question';
 export const NUM_OF_QUESTIONS_TO_FETCH = 20;
 export const MINIMUM_QUESTION_CAPACITY = 5;
 export const RADIO_CORRECT_COLOR = 'green';
 export const RADIO_WRONG_COLOR = 'red';
-export const BUTTON_ENABLE_CLASS_NAME = 'primary';
 export const BUTTON_SKIP_TEXT = 'Skip';
 export const BUTTON_SUBMIT_TEXT = 'Submit';
 export const BUTTON_NEXT_TEXT = 'Next';
@@ -84,3 +84,10 @@ export const MESSAGE_ANSWER_CORRECT = 'Awesome! Score +1';
 export const MESSAGE_ANSWER_WRONG = 'That\'s incorrect.. Score -1';
 export const TOAST_SKIP_QUESTION = 'Skipped the question. Score -1';
 export const FOOTER_MARGIN = 12;
+
+/**
+ * Profile Page
+ */
+export const PROFILE_TITLE = 'Profile';
+export const LAST_NAME_LABEL = 'Last Name:';
+export const UNIT_LABEL = 'Unit:';
