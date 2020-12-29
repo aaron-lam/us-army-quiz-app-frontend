@@ -4,7 +4,7 @@ import React, {
 import {
   Button, Dropdown, DropdownProps, Form, Header,
 } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   API_URL, API_URL_PATH_UNITS, LOCAL_STORAGE_LAST_NAME_KEY,
@@ -44,6 +44,7 @@ const UserInfoForm: React.FC = (): ReactElement => {
   const [lastName, setLastName] = useState<string>('');
   const [unit, setUnit] = useState<Unit | null>(null);
   const [dropdownList, setDropdownList] = useState<dropdownOption[]>([]);
+  const history = useHistory();
 
   useEffect(() => {
     fetch(API_URL + API_URL_PATH_UNITS)
@@ -59,6 +60,7 @@ const UserInfoForm: React.FC = (): ReactElement => {
     localStorage.setItem(LOCAL_STORAGE_LAST_NAME_KEY, lastName);
     localStorage.setItem(LOCAL_STORAGE_UNIT_ID_KEY, unit ? unit.id.toString() : '');
     localStorage.setItem(LOCAL_STORAGE_UNIT_KEY, unit ? unit.name.toString() : '');
+    history.push('/quiz');
   };
 
   const lastNameFieldOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -113,6 +115,7 @@ const UserInfoForm: React.FC = (): ReactElement => {
             as={Link}
             to="/quiz"
             color="green"
+            type="submit"
           >
             Submit
           </Button>
