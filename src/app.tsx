@@ -25,15 +25,6 @@ const App: React.FC = (): ReactElement => (
     <BrowserRouter>
       <AppHeader />
       <Container>
-        <Switch>
-          <Route path="/" exact>
-            <Redirect to="/quiz" />
-          </Route>
-          <Route path="/quiz" exact component={QuizSelectionsPage} />
-          <Route path="/quiz/:armyUnitsQuizType/instructions" exact component={QuizInstructionPage} />
-          <Route path="/quiz/:armyUnitsQuizType" exact component={QuizPage} />
-          <Route path="/profile" exact component={ProfilePage} />
-        </Switch>
         {hasFilledOutForm() ? (
           <Switch>
             <Route path="/" exact>
@@ -43,6 +34,7 @@ const App: React.FC = (): ReactElement => (
             <Route path="/quiz/:armyUnitsQuizType/instructions" exact component={QuizInstructionPage} />
             <Route path="/quiz/:armyUnitsQuizType" exact component={QuizPage} />
             <Route path="/user-info" exact component={UserInfoForm} />
+            <Route path="/profile" exact component={ProfilePage} />
           </Switch>
         ) : (
           <Switch>
