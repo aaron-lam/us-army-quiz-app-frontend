@@ -21,9 +21,9 @@ export const PATH_QUIZ = '/quiz/';
 export const PATH_INSTRUCTIONS = '/instructions/';
 export const API_URL = 'https://5663fc6c72ae.ngrok.io';
 export const API_URL_PATH_UNITS = '/units/';
-export const LOCAL_STORAGE_LAST_NAME_KEY = 'unitId';
-export const LOCAL_STORAGE_UNIT_ID_KEY = 'unit';
-export const LOCAL_STORAGE_UNIT_KEY = 'lastName';
+export const LOCAL_STORAGE_LAST_NAME_KEY = 'lastName';
+export const LOCAL_STORAGE_UNIT_ID_KEY = 'unitId';
+export const LOCAL_STORAGE_UNIT_KEY = 'unit';
 
 /**
  * App Header
