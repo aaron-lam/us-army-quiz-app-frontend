@@ -2,7 +2,7 @@ import React, {
   ReactElement, useEffect, useState,
 } from 'react';
 import {
-  Button, Header, Input, List, Segment,
+  Button, Header, Input, List, Message, Segment,
 } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -15,11 +15,12 @@ import {
   BUTTON_TEXT_SAVE,
   BUTTON_TEXT_VIEW_MODE, COMPANY,
   MOCK_UNIT_LIST,
-  NAVIGATION_PATH_SEPARATOR,
+  NAVIGATION_PATH_SEPARATOR, NOT_AUTHORIZED_MESSAGE,
   PLACEHOLDER_ID,
   PRIMARY_COLOR,
 } from '../contants';
 import { Unit } from '../types';
+import { isUserDivisionLevel } from '../utils/units';
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -129,6 +130,13 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
     setUnitList(unitList.concat([{ id: PLACEHOLDER_ID, name: '', unitType: '' }]));
   };
 
+  if (!isUserDivisionLevel()) {
+    return (
+      <Message negative>
+        <Message.Header>{NOT_AUTHORIZED_MESSAGE}</Message.Header>
+      </Message>
+    );
+  }
   return (
     <div>
       <Header>Question Builder</Header>

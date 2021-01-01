@@ -123,6 +123,7 @@ export const MOCK_UNIT_LIST = [
   { id: 1, name: '72th', unitType: 'division' },
   { id: 2, name: '2nd', unitType: 'division' },
 ];
+export const NOT_AUTHORIZED_MESSAGE = 'You don\'t have permission to access this page.';
 export const DELETE_UNIT_TITLE = 'Delete Unit:';
 export const DELETE_UNIT_CONFIRM_MESSAGE = 'Are you sure you want to delete this unit? '
   + 'All the units below it will also be removed';
