@@ -7,12 +7,13 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  BATTALION,
-  BRIGADE, BUTTON_TEXT_ADD_UNIT, BUTTON_TEXT_DELETE,
+  BATTALION, BRIGADE,
+  BUTTON_TEXT_ADD_UNIT,
+  BUTTON_TEXT_DELETE,
   BUTTON_TEXT_EDIT,
   BUTTON_TEXT_EDIT_MODE,
   BUTTON_TEXT_SAVE,
-  BUTTON_TEXT_VIEW_MODE, COMPANY, DIVISION,
+  BUTTON_TEXT_VIEW_MODE, COMPANY,
   MOCK_UNIT_LIST,
   NAVIGATION_PATH_SEPARATOR,
   PLACEHOLDER_ID,
@@ -37,8 +38,8 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [isEditingUnit, setIsEditingUnit] = useState<boolean>(false);
   const [editItemId, setEditItemId] = useState<number>(PLACEHOLDER_ID);
+  const unitHierarchies = [BRIGADE, BATTALION, COMPANY];
 
-  const unitHierarchies = [DIVISION, BRIGADE, BATTALION, COMPANY];
   const urlPath = useLocation().pathname;
 
   useEffect(() => {
@@ -125,7 +126,7 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
     setIsEditMode(true);
     setIsEditingUnit(true);
     setEditItemId(PLACEHOLDER_ID);
-    setUnitList(unitList.concat([{ id: PLACEHOLDER_ID, name: '' }]));
+    setUnitList(unitList.concat([{ id: PLACEHOLDER_ID, name: '', unitType: '' }]));
   };
 
   return (

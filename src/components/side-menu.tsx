@@ -8,14 +8,15 @@ import IsSideMenuVisibleContext from '../context';
 import {
   ICON_NAME_PROFILE,
   ICON_NAME_QUESTION_BUILDER,
-  ICON_NAME_QUIZ,
+  ICON_NAME_QUIZ, ICON_NAME_SIGN_OUT,
   PATH_PROFILE,
   PATH_QUESTION_BUILDER,
-  PATH_QUIZ,
+  PATH_QUIZ, PATH_USER_INFO,
   SIDE_MENU_PROFILE_TITLE,
   SIDE_MENU_QUESTION_BUILDER,
-  SIDE_MENU_QUIZ_TITLE,
+  SIDE_MENU_QUIZ_TITLE, SIDE_MENU_SIGN_OUT,
 } from '../contants';
+import { isUserDivisionLevel } from '../utils/units';
 
 const SideMenu: React.FC = (): ReactElement => {
   const { isSideMenuVisible, setIsSideMenuVisible } = useContext(IsSideMenuVisibleContext);
@@ -53,6 +54,18 @@ const SideMenu: React.FC = (): ReactElement => {
         {SIDE_MENU_QUIZ_TITLE}
       </Menu.Item>
       <Menu.Item
+        as={Link}
+        to={PATH_USER_INFO}
+        onClick={() => {
+          localStorage.clear();
+          window.location.reload();
+        }}
+      >
+        <Icon name={ICON_NAME_SIGN_OUT} />
+        {SIDE_MENU_SIGN_OUT}
+      </Menu.Item>
+      <Menu.Item
+        style={{ visibility: isUserDivisionLevel() ? 'visible' : 'hidden' }}
         as={Link}
         to={PATH_QUESTION_BUILDER}
         onClick={closeSideMenu}

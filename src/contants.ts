@@ -26,13 +26,13 @@ export const PATH_QUESTION_BUILDER = '/questionbuilder';
 export const PATH_DIVISIONS = '/divisions';
 export const PATH_USER_INFO = '/userinfo';
 export const PATH_DELETE_UNIT = '/delete';
-export const PATH_PARAM_UNIT_ID = '/:id';
 export const API_URL = 'https://c32cca83be33.ngrok.io';
 export const API_URL_PATH_UNITS = '/units';
 export const API_URL_PATH_QUESTIONS = '/questions';
 export const LOCAL_STORAGE_LAST_NAME_KEY = 'lastName';
 export const LOCAL_STORAGE_UNIT_ID_KEY = 'unitId';
 export const LOCAL_STORAGE_UNIT_KEY = 'unit';
+export const LOCAL_STORAGE_UNIT_TYPE_KEY = 'unitType';
 export const BUTTON_DEFAULT_COLOR = 'primary';
 export const LOADER_SIZE = 'massive';
 export const COMPANY = 'company';
@@ -46,9 +46,11 @@ export const DIVISION = 'division';
 export const SIDE_MENU_PROFILE_TITLE = 'Profile';
 export const SIDE_MENU_QUIZ_TITLE = 'Quiz';
 export const SIDE_MENU_QUESTION_BUILDER = 'Question Builder';
+export const SIDE_MENU_SIGN_OUT = 'Sign Out';
 export const ICON_NAME_PROFILE = 'user circle';
 export const ICON_NAME_QUIZ = 'question circle outline';
 export const ICON_NAME_QUESTION_BUILDER = 'newspaper outline';
+export const ICON_NAME_SIGN_OUT = 'sign out';
 
 /**
  * App Header
@@ -70,6 +72,7 @@ export const LAST_NAME_INVALID_MESSAGE = 'Last Name can only contains alphabets.
  * Quiz Selections Page
  */
 export const QUIZ_SELECTIONS_CARD_DESCRIPTION = 'Guess which company belongs to the corresponding';
+export const PLACEHOLDER_LEVEL = -1;
 
 /**
  * Quiz Instructions Page
@@ -87,7 +90,7 @@ export const MARGIN_BETWEEN_PARAGRAPH = 28;
 /**
  * Quiz Page
  */
-export const LEVEL_LABEL = 'Level';
+export const LEVEL_LABEL = 'Level:';
 export const SCORE_LABEL = 'Score:';
 export const QUESTION = 'Question';
 export const NUM_OF_QUESTIONS_TO_FETCH = 20;
@@ -115,7 +118,11 @@ export const UNIT_LABEL = 'Unit:';
 /**
  * Question Builder Page
  */
-export const MOCK_UNIT_LIST = [{ id: 0, name: '86th' }, { id: 1, name: '72th' }, { id: 2, name: '2nd' }];
+export const MOCK_UNIT_LIST = [
+  { id: 0, name: '86th', unitType: 'division' },
+  { id: 1, name: '72th', unitType: 'division' },
+  { id: 2, name: '2nd', unitType: 'division' },
+];
 export const DELETE_UNIT_TITLE = 'Delete Unit:';
 export const DELETE_UNIT_CONFIRM_MESSAGE = 'Are you sure you want to delete this unit? '
   + 'All the units below it will also be removed';

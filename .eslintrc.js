@@ -41,7 +41,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/no-array-index-key': 'off',
-    'linebreak-style': ['error', 'windows'],
+    'linebreak-style': 'off',
   },
   overrides: [
     {
