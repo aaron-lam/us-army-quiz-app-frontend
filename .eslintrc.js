@@ -1,3 +1,4 @@
+/*eslint linebreak-style: ["error", "windows"]*/
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
@@ -41,6 +42,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/no-array-index-key': 'off',
+    'linebreak-style': ['error', 'windows']
   },
   overrides: [
     {
