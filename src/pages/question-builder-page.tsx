@@ -6,13 +6,21 @@ import {
 } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { confirmAlert } from 'react-confirm-alert';
 import {
   BATTALION,
-  BRIGADE, BUTTON_TEXT_ADD_UNIT, BUTTON_TEXT_DELETE,
+  BRIGADE,
+  BUTTON_TEXT_ADD_UNIT,
+  BUTTON_TEXT_DELETE,
   BUTTON_TEXT_EDIT,
   BUTTON_TEXT_EDIT_MODE,
   BUTTON_TEXT_SAVE,
-  BUTTON_TEXT_VIEW_MODE, COMPANY, DIVISION,
+  BUTTON_TEXT_VIEW_MODE,
+  COMPANY,
+  DELETE_UNIT_BUTTON_CANCEL, DELETE_UNIT_BUTTON_DELETE,
+  DELETE_UNIT_CONFIRM_MESSAGE,
+  DELETE_UNIT_TITLE,
+  DIVISION,
   MOCK_UNIT_LIST,
   NAVIGATION_PATH_SEPARATOR,
   PLACEHOLDER_ID,
@@ -71,6 +79,23 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
 
   const isDisplayingLowestUnitLevel = () => getChildUnit() === '';
 
+  const deleteUnitOnClick = () => {
+    confirmAlert({
+      title: DELETE_UNIT_TITLE,
+      message: DELETE_UNIT_CONFIRM_MESSAGE,
+      buttons: [
+        {
+          label: DELETE_UNIT_BUTTON_DELETE,
+          onClick: () => {},
+        },
+        {
+          label: DELETE_UNIT_BUTTON_CANCEL,
+          onClick: () => {},
+        },
+      ],
+    });
+  };
+
   const renderListItems = () => unitList.map(({ id, name }: Unit) => (
     <List.Item key={id}>
       <List.Content
@@ -92,6 +117,7 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
         <Button
           negative
           disabled={isEditingUnit}
+          onClick={deleteUnitOnClick}
         >
           {BUTTON_TEXT_DELETE}
         </Button>
