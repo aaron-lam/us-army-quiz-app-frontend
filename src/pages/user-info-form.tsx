@@ -7,11 +7,12 @@ import {
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  API_URL, API_URL_PATH_UNITS, LOCAL_STORAGE_LAST_NAME_KEY,
+  API_URL, API_URL_PATH_UNITS, LAST_NAME_INVALID_MESSAGE, LOCAL_STORAGE_LAST_NAME_KEY,
   LOCAL_STORAGE_UNIT_ID_KEY,
-  LOCAL_STORAGE_UNIT_KEY, PLACEHOLDER_DROP_DOWN,
+  LOCAL_STORAGE_UNIT_KEY, PATH_QUIZ, PLACEHOLDER_DROP_DOWN,
   PLACEHOLDER_LAST_NAME, USER_FORM_DESCRIPTION,
 } from '../contants';
+import { Unit } from '../types';
 
 const FlexContainer = styled.div`
   display: flex;
@@ -26,11 +27,6 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   width: 100%;
 `;
-
-type Unit = {
-  id: number,
-  name: string,
-}
 
 type dropdownOption = {
   id: number,
@@ -90,7 +86,7 @@ const UserInfoForm: React.FC = (): ReactElement => {
           <Form.Input
             error={(hasInvalidInput)
               ? {
-                content: 'Last Name can only contains alphabets.',
+                content: LAST_NAME_INVALID_MESSAGE,
                 pointing: 'below',
               } : undefined}
             onChange={lastNameFieldOnChange}
@@ -113,7 +109,7 @@ const UserInfoForm: React.FC = (): ReactElement => {
             disabled={!isValidToSubmit()}
             onClick={formOnSubmit}
             as={Link}
-            to="/quiz"
+            to={PATH_QUIZ}
             color="green"
             type="submit"
           >

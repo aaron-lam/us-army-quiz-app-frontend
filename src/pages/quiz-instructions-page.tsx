@@ -5,6 +5,7 @@ import {
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
+  BATTALION,
   BUTTON_DEFAULT_COLOR,
   FONT_SIZE_MEDIUM,
   LEVEL_LABEL,
@@ -39,7 +40,7 @@ const QuizInstructionPage: React.FC = (): ReactElement => {
   return (
     <FlexContainer>
       <Container text>
-        <Header as="h2">{`${LEVEL_LABEL} ${armyUnitsQuizType === 'battalion' ? 1 : 2}`}</Header>
+        <Header as="h2">{`${LEVEL_LABEL} ${armyUnitsQuizType === BATTALION ? 1 : 2}`}</Header>
         <Paragraph>
           {`${QUIZ_INSTRUCTION_PARAGRAPH_ONE} ${armyUnitsQuizType}.`}
         </Paragraph>
@@ -52,7 +53,7 @@ const QuizInstructionPage: React.FC = (): ReactElement => {
         <ButtonContainer>
           <Button
             as={Link}
-            to={PATH_QUIZ + armyUnitsQuizType}
+            to={`${PATH_QUIZ}/${armyUnitsQuizType}`}
             className={BUTTON_DEFAULT_COLOR}
           >
             Start

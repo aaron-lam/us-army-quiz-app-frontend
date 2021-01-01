@@ -14,7 +14,7 @@ type QuizSelectionCardProps = {
 }
 
 const QuizSelectionCard: React.FC<QuizSelectionCardProps> = ({ level, armyUnitQuizType }): ReactElement => (
-  <Card as={Link} to={PATH_QUIZ + armyUnitQuizType + PATH_INSTRUCTIONS} fluid color={PRIMARY_COLOR}>
+  <Card as={Link} to={`${PATH_QUIZ}/${armyUnitQuizType}${PATH_INSTRUCTIONS}`} fluid color={PRIMARY_COLOR}>
     <Card.Content>
       <Card.Header style={{ fontSize: FONT_SIZE_LARGE }}>
         {`${LEVEL_LABEL} ${level}`}

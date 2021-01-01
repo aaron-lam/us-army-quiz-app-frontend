@@ -6,7 +6,15 @@ import { ReactElement, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import IsSideMenuVisibleContext from '../context';
 import {
-  PATH_PROFILE, PATH_QUIZ, SIDE_MENU_PROFILE_TITLE, SIDE_MENU_QUIZ_TITLE,
+  ICON_NAME_PROFILE,
+  ICON_NAME_QUESTION_BUILDER,
+  ICON_NAME_QUIZ,
+  PATH_PROFILE,
+  PATH_QUESTION_BUILDER,
+  PATH_QUIZ,
+  SIDE_MENU_PROFILE_TITLE,
+  SIDE_MENU_QUESTION_BUILDER,
+  SIDE_MENU_QUIZ_TITLE,
 } from '../contants';
 
 const SideMenu: React.FC = (): ReactElement => {
@@ -33,7 +41,7 @@ const SideMenu: React.FC = (): ReactElement => {
         to={PATH_PROFILE}
         onClick={closeSideMenu}
       >
-        <Icon name="user circle" />
+        <Icon name={ICON_NAME_PROFILE} />
         {SIDE_MENU_PROFILE_TITLE}
       </Menu.Item>
       <Menu.Item
@@ -41,8 +49,16 @@ const SideMenu: React.FC = (): ReactElement => {
         to={PATH_QUIZ}
         onClick={closeSideMenu}
       >
-        <Icon name="question circle outline" />
+        <Icon name={ICON_NAME_QUIZ} />
         {SIDE_MENU_QUIZ_TITLE}
+      </Menu.Item>
+      <Menu.Item
+        as={Link}
+        to={PATH_QUESTION_BUILDER}
+        onClick={closeSideMenu}
+      >
+        <Icon name={ICON_NAME_QUESTION_BUILDER} />
+        {SIDE_MENU_QUESTION_BUILDER}
       </Menu.Item>
     </Sidebar>
   );
