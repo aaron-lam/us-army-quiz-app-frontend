@@ -2,7 +2,7 @@ import React, {
   ReactElement, useEffect, useState,
 } from 'react';
 import {
-  Button, Header, Input, List, Segment,
+  Button, Header, Input, List, Message, Segment,
 } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -17,16 +17,18 @@ import {
   BUTTON_TEXT_SAVE,
   BUTTON_TEXT_VIEW_MODE,
   COMPANY,
-  DELETE_UNIT_BUTTON_CANCEL, DELETE_UNIT_BUTTON_DELETE,
+  DELETE_UNIT_BUTTON_CANCEL,
+  DELETE_UNIT_BUTTON_DELETE,
   DELETE_UNIT_CONFIRM_MESSAGE,
   DELETE_UNIT_TITLE,
-  DIVISION,
   MOCK_UNIT_LIST,
   NAVIGATION_PATH_SEPARATOR,
+  NOT_AUTHORIZED_MESSAGE,
   PLACEHOLDER_ID,
   PRIMARY_COLOR,
 } from '../contants';
 import { Unit } from '../types';
+import { isUserDivisionLevel } from '../utils/units';
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -45,8 +47,8 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [isEditingUnit, setIsEditingUnit] = useState<boolean>(false);
   const [editItemId, setEditItemId] = useState<number>(PLACEHOLDER_ID);
+  const unitHierarchies = [BRIGADE, BATTALION, COMPANY];
 
-  const unitHierarchies = [DIVISION, BRIGADE, BATTALION, COMPANY];
   const urlPath = useLocation().pathname;
 
   useEffect(() => {
@@ -151,9 +153,16 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
     setIsEditMode(true);
     setIsEditingUnit(true);
     setEditItemId(PLACEHOLDER_ID);
-    setUnitList(unitList.concat([{ id: PLACEHOLDER_ID, name: '' }]));
+    setUnitList(unitList.concat([{ id: PLACEHOLDER_ID, name: '', unitType: '' }]));
   };
 
+  if (!isUserDivisionLevel()) {
+    return (
+      <Message negative>
+        <Message.Header>{NOT_AUTHORIZED_MESSAGE}</Message.Header>
+      </Message>
+    );
+  }
   return (
     <div>
       <Header>Question Builder</Header>

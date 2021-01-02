@@ -7,10 +7,16 @@ import {
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  API_URL, API_URL_PATH_UNITS, LAST_NAME_INVALID_MESSAGE, LOCAL_STORAGE_LAST_NAME_KEY,
+  API_URL, API_URL_PATH_UNITS,
+  LAST_NAME_INVALID_MESSAGE,
+  LOCAL_STORAGE_LAST_NAME_KEY,
   LOCAL_STORAGE_UNIT_ID_KEY,
-  LOCAL_STORAGE_UNIT_KEY, PATH_QUIZ, PLACEHOLDER_DROP_DOWN,
-  PLACEHOLDER_LAST_NAME, USER_FORM_DESCRIPTION,
+  LOCAL_STORAGE_UNIT_KEY,
+  LOCAL_STORAGE_UNIT_TYPE_KEY,
+  PATH_QUIZ,
+  PLACEHOLDER_DROP_DOWN,
+  PLACEHOLDER_LAST_NAME,
+  USER_FORM_DESCRIPTION,
 } from '../contants';
 import { Unit } from '../types';
 
@@ -28,9 +34,10 @@ const ButtonContainer = styled.div`
   width: 100%;
 `;
 
-type dropdownOption = {
+type DropdownOption = {
   id: number,
   name: string,
+  unitType: string,
   text: string,
   value: number,
 }
@@ -39,14 +46,16 @@ const UserInfoForm: React.FC = (): ReactElement => {
   const [hasInvalidInput, setHasInvalidInput] = useState<boolean>(false);
   const [lastName, setLastName] = useState<string>('');
   const [unit, setUnit] = useState<Unit | null>(null);
-  const [dropdownList, setDropdownList] = useState<dropdownOption[]>([]);
+  const [dropdownList, setDropdownList] = useState<DropdownOption[]>([]);
 
   useEffect(() => {
     fetch(API_URL + API_URL_PATH_UNITS)
       .then((response) => response.json())
       .then((data) => {
         setDropdownList(
-          data.units.map((unitObject: Unit) => ({ ...unitObject, text: unitObject.name, value: unitObject.id })),
+          data.units.map((unitObject: Unit) => ({
+            ...unitObject, text: unitObject.name, value: unitObject.id,
+          })),
         );
       });
   }, []);
@@ -54,7 +63,8 @@ const UserInfoForm: React.FC = (): ReactElement => {
   const formOnSubmit = () => {
     localStorage.setItem(LOCAL_STORAGE_LAST_NAME_KEY, lastName);
     localStorage.setItem(LOCAL_STORAGE_UNIT_ID_KEY, unit ? unit.id.toString() : '');
-    localStorage.setItem(LOCAL_STORAGE_UNIT_KEY, unit ? unit.name.toString() : '');
+    localStorage.setItem(LOCAL_STORAGE_UNIT_KEY, unit ? unit.name : '');
+    localStorage.setItem(LOCAL_STORAGE_UNIT_TYPE_KEY, unit ? unit.unitType : '');
     // refresh to reconstruct an updated react router in App.tsx
     window.location.reload();
   };
@@ -68,10 +78,13 @@ const UserInfoForm: React.FC = (): ReactElement => {
 
   const getUnitName = (id: number) => dropdownList.filter((unitOption) => unitOption.id === id)[0].name;
 
+  const getUnitType = (id: number) => dropdownList.filter((unitOption) => unitOption.id === id)[0].unitType;
+
   const dropdownOnChange = (event: SyntheticEvent<HTMLElement, Event>, { value }: DropdownProps) => {
     setUnit({
       id: Number(value),
       name: getUnitName(Number(value)),
+      unitType: getUnitType(Number(value)),
     });
   };
 

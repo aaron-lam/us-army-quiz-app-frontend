@@ -9,15 +9,14 @@ import {
 } from '../contants';
 
 type QuizSelectionCardProps = {
-  level: number,
   armyUnitQuizType: string
 }
 
-const QuizSelectionCard: React.FC<QuizSelectionCardProps> = ({ level, armyUnitQuizType }): ReactElement => (
+const QuizSelectionCard: React.FC<QuizSelectionCardProps> = ({ armyUnitQuizType }): ReactElement => (
   <Card as={Link} to={`${PATH_QUIZ}/${armyUnitQuizType}${PATH_INSTRUCTIONS}`} fluid color={PRIMARY_COLOR}>
     <Card.Content>
       <Card.Header style={{ fontSize: FONT_SIZE_LARGE }}>
-        {`${LEVEL_LABEL} ${level}`}
+        {`${LEVEL_LABEL} ${armyUnitQuizType}`}
       </Card.Header>
       <Card.Description style={{ fontSize: FONT_SIZE_MEDIUM }}>
         {QUIZ_SELECTIONS_CARD_DESCRIPTION}
@@ -28,7 +27,6 @@ const QuizSelectionCard: React.FC<QuizSelectionCardProps> = ({ level, armyUnitQu
 );
 
 QuizSelectionCard.propTypes = {
-  level: PropTypes.number.isRequired,
   armyUnitQuizType: PropTypes.string.isRequired,
 };
 

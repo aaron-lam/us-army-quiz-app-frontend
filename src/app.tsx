@@ -65,10 +65,6 @@ const App: React.FC = (): ReactElement => {
               ) : (
                 <Switch>
                   <Route path={PATH_USER_INFO} exact component={UserInfoForm} />
-                  <Route path={PATH_QUESTION_BUILDER + PATH_DIVISIONS} component={QuestionBuilderPage} />
-                  <Route path={PATH_QUESTION_BUILDER} exact>
-                    <Redirect to={PATH_QUESTION_BUILDER + PATH_DIVISIONS} />
-                  </Route>
                   <Route path="*">
                     <Redirect to={PATH_USER_INFO} />
                   </Route>

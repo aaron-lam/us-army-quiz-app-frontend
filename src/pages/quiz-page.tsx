@@ -29,7 +29,8 @@ import {
   MINIMUM_QUESTION_CAPACITY,
   API_URL,
   LOCAL_STORAGE_UNIT_ID_KEY,
-  NUM_OF_QUESTIONS_TO_FETCH, LOADER_SIZE, BATTALION, API_URL_PATH_QUESTIONS,
+  NUM_OF_QUESTIONS_TO_FETCH, LOADER_SIZE,
+  API_URL_PATH_QUESTIONS,
 } from '../contants';
 
 const HeaderContainer = styled.div`
@@ -162,7 +163,7 @@ const QuizPage: React.FC = (): ReactElement => {
     <div>
       {/* Quiz Header */}
       <HeaderContainer>
-        <div>{`${LEVEL_LABEL} ${armyUnitsQuizType === BATTALION ? 1 : 2}`}</div>
+        <div>{`${LEVEL_LABEL} ${armyUnitsQuizType}`}</div>
         <div>{`${SCORE_LABEL} ${score}`}</div>
       </HeaderContainer>
       <FlexContainer>
