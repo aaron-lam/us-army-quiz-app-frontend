@@ -57,9 +57,9 @@ const App: React.FC = (): ReactElement => {
                   />
                   <Route path={PATH_QUIZ + PATH_PARAM_QUIZ_TYPE} exact component={QuizPage} />
                   <Route path={PATH_PROFILE} exact component={ProfilePage} />
-                  <Route path={PATH_QUESTION_BUILDER + PATH_DIVISIONS} component={QuestionBuilderPage} />
+                  <Route path={`${PATH_QUESTION_BUILDER + PATH_DIVISIONS}/0/brigade`} component={QuestionBuilderPage} />
                   <Route path={PATH_QUESTION_BUILDER} exact>
-                    <Redirect to={PATH_QUESTION_BUILDER + PATH_DIVISIONS} />
+                    <Redirect to={`${PATH_QUESTION_BUILDER + PATH_DIVISIONS}/0/brigade`} />
                   </Route>
                 </Switch>
               ) : (

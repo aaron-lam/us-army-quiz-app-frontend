@@ -1,6 +1,6 @@
 import { ToastOptions } from 'react-toastify';
 
-export const toastConfig: ToastOptions = {
+export const TOAST_CONFIG_DEFAULT: ToastOptions = {
   position: 'bottom-center',
   autoClose: 2000,
   hideProgressBar: true,
@@ -9,6 +9,8 @@ export const toastConfig: ToastOptions = {
   draggable: false,
   progress: undefined,
 };
+
+export const TOAST_CONFIG_NO_AUTO_CLOSE: ToastOptions = { ...TOAST_CONFIG_DEFAULT, autoClose: false };
 
 /**
  * Global
@@ -26,7 +28,7 @@ export const PATH_QUESTION_BUILDER = '/questionbuilder';
 export const PATH_DIVISIONS = '/divisions';
 export const PATH_USER_INFO = '/userinfo';
 export const PATH_DELETE_UNIT = '/delete';
-export const API_URL = 'https://c32cca83be33.ngrok.io';
+export const API_URL = 'https://umts.live';
 export const API_URL_PATH_UNITS = '/units';
 export const API_URL_PATH_QUESTIONS = '/questions';
 export const LOCAL_STORAGE_LAST_NAME_KEY = 'lastName';
@@ -124,11 +126,6 @@ export const UNIT_LABEL = 'Unit:';
 /**
  * Question Builder Page
  */
-export const MOCK_UNIT_LIST = [
-  { id: 0, name: '86th', unitType: 'division' },
-  { id: 1, name: '72th', unitType: 'division' },
-  { id: 2, name: '2nd', unitType: 'division' },
-];
 export const NOT_AUTHORIZED_MESSAGE = 'You don\'t have permission to access this page.';
 export const DELETE_UNIT_TITLE = 'Confirm to Delete';
 export const DELETE_UNIT_CONFIRM_MESSAGE = 'Are you sure you want to delete this unit? '
@@ -143,3 +140,8 @@ export const BUTTON_TEXT_SAVE = 'Save';
 export const BUTTON_TEXT_EDIT = 'Edit';
 export const PLACEHOLDER_ID = -1;
 export const NAVIGATION_PATH_SEPARATOR = ' > ';
+export const FETCH_UNITS_ERROR_MESSAGE = 'Some errors occurred while loading the units. '
+  + 'Please refresh the page and try again.';
+export const TOAST_ERROR_MESSAGE_UPDATE_UNIT = 'Failed to update the unit name. Please try again.';
+export const TOAST_ERROR_MESSAGE_DELETE_UNIT = 'Failed to delete the unit. Please try again.';
+export const TOAST_ERROR_MESSAGE_EMPTY_UNIT_NAME = 'Unit name cannot be empty. Please try again.';

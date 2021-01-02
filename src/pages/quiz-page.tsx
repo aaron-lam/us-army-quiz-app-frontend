@@ -16,7 +16,7 @@ import {
   TOAST_SKIP_QUESTION,
   LEVEL_LABEL,
   SCORE_LABEL,
-  toastConfig,
+  TOAST_CONFIG_NO_AUTO_CLOSE,
   RADIO_CORRECT_COLOR,
   RADIO_WRONG_COLOR,
   QUESTION,
@@ -29,7 +29,8 @@ import {
   MINIMUM_QUESTION_CAPACITY,
   API_URL,
   LOCAL_STORAGE_UNIT_ID_KEY,
-  NUM_OF_QUESTIONS_TO_FETCH, LOADER_SIZE,
+  NUM_OF_QUESTIONS_TO_FETCH,
+  LOADER_SIZE,
   API_URL_PATH_QUESTIONS,
   FETCH_QUESTIONS_ERROR_MESSAGE,
 } from '../contants';
@@ -56,6 +57,12 @@ const QuizContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+`;
+
+const LoaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
 `;
 
 const FooterContainer = styled.div`
@@ -143,7 +150,7 @@ const QuizPage: React.FC = (): ReactElement => {
   const onClickSkip = () => {
     if (!hasSubmitAnswer) {
       setScore(score - 1);
-      toast.warn(TOAST_SKIP_QUESTION, toastConfig);
+      toast.warn(TOAST_SKIP_QUESTION, TOAST_CONFIG_NO_AUTO_CLOSE);
       goToNextQuestion();
     }
   };
@@ -164,11 +171,6 @@ const QuizPage: React.FC = (): ReactElement => {
       </Message>
     );
   }
-  if (isLoading) {
-    return (
-      <Loader size={LOADER_SIZE} active />
-    );
-  }
   return (
     <div>
       {/* Quiz Header */}
@@ -177,33 +179,40 @@ const QuizPage: React.FC = (): ReactElement => {
         <div>{`${SCORE_LABEL} ${score}`}</div>
       </HeaderContainer>
       <FlexContainer>
-        <QuizContainer>
-          {/* Quiz Question */}
-          <Header>{`${QUESTION} ${questionNumber}: ${getCurrentQuestion().question}`}</Header>
-          <Header
-            style={{ textAlign: 'center', visibility: hasSubmitAnswer ? 'visible' : 'hidden' }}
-          >
-            {`${isCorrectAnswer(indexOfSelectedRadio) ? MESSAGE_ANSWER_CORRECT : MESSAGE_ANSWER_WRONG}`}
-          </Header>
-          {/* Quiz Multiple Choice */}
-          <Form>
-            {getCurrentQuestion().choices.map((choice, index) => (
-              <Form.Field key={index}>
-                <Button
-                  style={{ textAlign: 'left', width: '100%' }}
-                  index={index}
-                  className={`${hasSubmitAnswer ? getRadioResultColor(index) : ''}`}
-                  onClick={onClickRadio}
-                >
-                  <Radio
-                    label={choice}
-                    checked={indexOfSelectedRadio === index}
-                  />
-                </Button>
-              </Form.Field>
-            ))}
-          </Form>
-        </QuizContainer>
+        {(isLoading) ? (
+          <LoaderContainer>
+            <Loader style={{ height: '30%' }} size={LOADER_SIZE} active centered />
+          </LoaderContainer>
+        )
+          : (
+            <QuizContainer>
+              {/* Quiz Question */}
+              <Header>{`${QUESTION} ${questionNumber}: ${getCurrentQuestion().question}`}</Header>
+              <Header
+                style={{ textAlign: 'center', visibility: hasSubmitAnswer ? 'visible' : 'hidden' }}
+              >
+                {`${isCorrectAnswer(indexOfSelectedRadio) ? MESSAGE_ANSWER_CORRECT : MESSAGE_ANSWER_WRONG}`}
+              </Header>
+              {/* Quiz Multiple Choice */}
+              <Form>
+                {getCurrentQuestion().choices.map((choice, index) => (
+                  <Form.Field key={index}>
+                    <Button
+                      style={{ textAlign: 'left', width: '100%' }}
+                      index={index}
+                      className={`${hasSubmitAnswer ? getRadioResultColor(index) : ''}`}
+                      onClick={onClickRadio}
+                    >
+                      <Radio
+                        label={choice}
+                        checked={indexOfSelectedRadio === index}
+                      />
+                    </Button>
+                  </Form.Field>
+                ))}
+              </Form>
+            </QuizContainer>
+          )}
         {/* Quiz Buttons */}
         <FooterContainer>
           <ButtonsContainer>
