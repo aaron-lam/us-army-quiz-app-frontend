@@ -2,12 +2,13 @@ import React, {
   ChangeEvent, ReactElement, SyntheticEvent, useEffect, useState,
 } from 'react';
 import {
-  Button, Dropdown, DropdownProps, Form, Header,
+  Button, Dropdown, DropdownProps, Form, Header, Message,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   API_URL, API_URL_PATH_UNITS,
+  FETCH_DROPDOWN_DATA_ERROR_MESSAGE,
   LAST_NAME_INVALID_MESSAGE,
   LOCAL_STORAGE_LAST_NAME_KEY,
   LOCAL_STORAGE_UNIT_ID_KEY,
@@ -16,6 +17,7 @@ import {
   PATH_QUIZ,
   PLACEHOLDER_DROP_DOWN,
   PLACEHOLDER_LAST_NAME,
+  USER_FORM_BUTTON_TEXT_SUBMIT,
   USER_FORM_DESCRIPTION,
 } from '../contants';
 import { Unit } from '../types';
@@ -44,6 +46,7 @@ type DropdownOption = {
 
 const UserInfoForm: React.FC = (): ReactElement => {
   const [hasInvalidInput, setHasInvalidInput] = useState<boolean>(false);
+  const [hasFetchError, setHasFetchError] = useState<boolean>(false);
   const [lastName, setLastName] = useState<string>('');
   const [unit, setUnit] = useState<Unit | null>(null);
   const [dropdownList, setDropdownList] = useState<DropdownOption[]>([]);
@@ -57,7 +60,8 @@ const UserInfoForm: React.FC = (): ReactElement => {
             ...unitObject, text: unitObject.name, value: unitObject.id,
           })),
         );
-      });
+      })
+      .catch(() => setHasFetchError(true));
   }, []);
 
   const formOnSubmit = () => {
@@ -116,6 +120,11 @@ const UserInfoForm: React.FC = (): ReactElement => {
             onChange={dropdownOnChange}
             options={dropdownList}
           />
+          {hasFetchError ? (
+            <Message negative>
+              <Message.Header>{FETCH_DROPDOWN_DATA_ERROR_MESSAGE}</Message.Header>
+            </Message>
+          ) : <></> }
         </Form.Field>
         <ButtonContainer>
           <Button
@@ -126,7 +135,7 @@ const UserInfoForm: React.FC = (): ReactElement => {
             color="green"
             type="submit"
           >
-            Submit
+            {USER_FORM_BUTTON_TEXT_SUBMIT}
           </Button>
         </ButtonContainer>
       </Form>
