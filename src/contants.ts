@@ -124,9 +124,11 @@ export const MOCK_UNIT_LIST = [
   { id: 2, name: '2nd', unitType: 'division' },
 ];
 export const NOT_AUTHORIZED_MESSAGE = 'You don\'t have permission to access this page.';
-export const DELETE_UNIT_TITLE = 'Delete Unit:';
+export const DELETE_UNIT_TITLE = 'Confirm to Delete';
 export const DELETE_UNIT_CONFIRM_MESSAGE = 'Are you sure you want to delete this unit? '
   + 'All the units below it will also be removed';
+export const DELETE_UNIT_BUTTON_DELETE = 'Delete';
+export const DELETE_UNIT_BUTTON_CANCEL = 'Cancel';
 export const BUTTON_TEXT_VIEW_MODE = 'View Mode';
 export const BUTTON_TEXT_EDIT_MODE = 'Edit Mode';
 export const BUTTON_TEXT_ADD_UNIT = 'Add New Unit';

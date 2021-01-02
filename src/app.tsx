@@ -43,7 +43,7 @@ const App: React.FC = (): ReactElement => {
           <SideMenu />
           <Sidebar.Pusher>
             <AppHeader />
-            <Container style={{ height: '90vh' }}>
+            <Container style={{ height: '100vh' }}>
               {hasFilledOutForm() ? (
                 <Switch>
                   <Route path={[PATH_ROOT, PATH_USER_INFO]} exact>
