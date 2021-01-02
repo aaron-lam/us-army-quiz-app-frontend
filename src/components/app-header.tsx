@@ -6,7 +6,7 @@ import {
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import {
-  APP_HEADER, APP_LOGO_HEIGHT, APP_LOGO_URL, PATH_USER_INFO,
+  APP_HEADER, APP_LOGO_HEIGHT, APP_LOGO_URL, ICON_NAME_SIDEBAR, PATH_USER_INFO,
 } from '../contants';
 import IsSideMenuVisibleContext from '../context';
 
@@ -38,7 +38,7 @@ const AppHeader: React.FC = (): ReactElement => {
             setIsSideMenuVisible(true);
           }}
         >
-          <Icon fitted name="sidebar" />
+          <Icon fitted name={ICON_NAME_SIDEBAR} />
         </SidebarButton>
         <Image
           style={{ height: APP_LOGO_HEIGHT, width: 'auto' }}

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ReactElement, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
-  Button, ButtonProps, Form, Header, Loader, Radio,
+  Button, ButtonProps, Form, Header, Loader, Message, Radio,
 } from 'semantic-ui-react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -31,6 +31,7 @@ import {
   LOCAL_STORAGE_UNIT_ID_KEY,
   NUM_OF_QUESTIONS_TO_FETCH, LOADER_SIZE,
   API_URL_PATH_QUESTIONS,
+  FETCH_QUESTIONS_ERROR_MESSAGE,
 } from '../contants';
 
 const HeaderContainer = styled.div`
@@ -82,6 +83,7 @@ type QuestionInfo = {
 }
 
 const QuizPage: React.FC = (): ReactElement => {
+  const [hasFetchError, setHasFetchError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [score, setScore] = useState<number>(0);
   const [questionNumber, setQuestionNumber] = useState<number>(1);
@@ -104,7 +106,8 @@ const QuizPage: React.FC = (): ReactElement => {
       .then((data) => {
         setRequestData(requestData.concat(data));
         setIsLoading(false);
-      });
+      })
+      .catch(() => setHasFetchError(true));
   };
 
   useEffect(() => fetchQuestions(), []);
@@ -154,6 +157,13 @@ const QuizPage: React.FC = (): ReactElement => {
     }
   };
 
+  if (hasFetchError) {
+    return (
+      <Message negative>
+        <Message.Header>{FETCH_QUESTIONS_ERROR_MESSAGE}</Message.Header>
+      </Message>
+    );
+  }
   if (isLoading) {
     return (
       <Loader size={LOADER_SIZE} active />
