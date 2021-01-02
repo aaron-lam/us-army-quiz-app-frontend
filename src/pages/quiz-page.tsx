@@ -47,7 +47,7 @@ const FlexContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  height: 80vh;
+  height: 70vh;
 `;
 
 const QuizContainer = styled.div`

@@ -18,7 +18,6 @@ import {
 const FlexContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 60vh;
 `;
 
 const ButtonContainer = styled.div`
