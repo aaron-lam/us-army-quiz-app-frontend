@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   API_URL, API_URL_PATH_UNITS,
-  BATTALION,
   LAST_NAME_INVALID_MESSAGE,
   LOCAL_STORAGE_LAST_NAME_KEY,
   LOCAL_STORAGE_UNIT_ID_KEY,
@@ -55,8 +54,7 @@ const UserInfoForm: React.FC = (): ReactElement => {
       .then((data) => {
         setDropdownList(
           data.units.map((unitObject: Unit) => ({
-            // TODO: Remove manually added unitType when "/units" endpoint is updated
-            ...unitObject, text: unitObject.name, value: unitObject.id, unitType: BATTALION,
+            ...unitObject, text: unitObject.name, value: unitObject.id,
           })),
         );
       });
@@ -83,13 +81,11 @@ const UserInfoForm: React.FC = (): ReactElement => {
   const getUnitType = (id: number) => dropdownList.filter((unitOption) => unitOption.id === id)[0].unitType;
 
   const dropdownOnChange = (event: SyntheticEvent<HTMLElement, Event>, { value }: DropdownProps) => {
-    if (value) {
-      setUnit({
-        id: Number(value),
-        name: getUnitName(Number(value)),
-        unitType: getUnitType(Number(value)),
-      });
-    }
+    setUnit({
+      id: Number(value),
+      name: getUnitName(Number(value)),
+      unitType: getUnitType(Number(value)),
+    });
   };
 
   const isValidToSubmit = () => lastName !== '' && unit !== null;
