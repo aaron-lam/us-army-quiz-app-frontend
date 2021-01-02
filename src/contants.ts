@@ -116,9 +116,11 @@ export const UNIT_LABEL = 'Unit:';
  * Question Builder Page
  */
 export const MOCK_UNIT_LIST = [{ id: 0, name: '86th' }, { id: 1, name: '72th' }, { id: 2, name: '2nd' }];
-export const DELETE_UNIT_TITLE = 'Delete Unit:';
+export const DELETE_UNIT_TITLE = 'Confirm to Delete';
 export const DELETE_UNIT_CONFIRM_MESSAGE = 'Are you sure you want to delete this unit? '
   + 'All the units below it will also be removed';
+export const DELETE_UNIT_BUTTON_DELETE = 'Delete';
+export const DELETE_UNIT_BUTTON_CANCEL = 'Cancel';
 export const BUTTON_TEXT_VIEW_MODE = 'View Mode';
 export const BUTTON_TEXT_EDIT_MODE = 'Edit Mode';
 export const BUTTON_TEXT_ADD_UNIT = 'Add New Unit';
