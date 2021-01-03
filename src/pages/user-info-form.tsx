@@ -128,6 +128,7 @@ const UserInfoForm: React.FC = (): ReactElement => {
         </Form.Field>
         <ButtonContainer>
           <Button
+            style={{ webkitAppearance: 'none', MozAppearance: 'none' }}
             disabled={!isValidToSubmit()}
             onClick={formOnSubmit}
             as={Link}
