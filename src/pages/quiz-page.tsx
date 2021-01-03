@@ -61,7 +61,7 @@ const QuizContainer = styled.div`
 const LoaderContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 100%;
+  height: 75%;
 `;
 
 const FooterContainer = styled.div`
