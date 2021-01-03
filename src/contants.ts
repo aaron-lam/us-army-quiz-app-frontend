@@ -160,3 +160,8 @@ export const TOAST_ERROR_MESSAGE_CREATE_UNIT = 'Failed to create the unit. Pleas
 export const TOAST_ERROR_MESSAGE_UPDATE_UNIT = 'Failed to update the unit name. Please try again.';
 export const TOAST_ERROR_MESSAGE_DELETE_UNIT = 'Failed to delete the unit. Please try again.';
 export const TOAST_ERROR_MESSAGE_EMPTY_UNIT_NAME = 'Unit name cannot be empty. Please try again.';
+
+/**
+ * Error Page
+ */
+export const ERROR_MESSAGE_CHECK_LINK = 'Please check your link and retry again.';

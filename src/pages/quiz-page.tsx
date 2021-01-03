@@ -30,7 +30,12 @@ import {
   NUM_OF_QUESTIONS_TO_FETCH,
   LOADER_SIZE,
   API_URL_PATH_QUESTIONS,
-  FETCH_QUESTIONS_ERROR_MESSAGE, MARGIN_DEFAULT, ERROR_MESSAGE_RESPONSE_NOT_SUCCESS,
+  FETCH_QUESTIONS_ERROR_MESSAGE,
+  MARGIN_DEFAULT,
+  ERROR_MESSAGE_RESPONSE_NOT_SUCCESS,
+  ERROR_MESSAGE_INVALID_ROUTE,
+  ERROR_MESSAGE_SERVICE_UNAVAILABLE,
+  ERROR_MESSAGE_PLEASE_TRY_AGAIN,
 } from '../contants';
 import CongratsPage from './congrats-page';
 import isNotSuccess from '../utils/api';
@@ -176,9 +181,15 @@ const QuizPage: React.FC = (): ReactElement => {
 
   if (hasFetchError) {
     return (
-      <Message negative>
-        <Message.Header>{FETCH_QUESTIONS_ERROR_MESSAGE}</Message.Header>
-      </Message>
+      <Message
+        negative
+        header={FETCH_QUESTIONS_ERROR_MESSAGE}
+        list={[
+          ERROR_MESSAGE_INVALID_ROUTE,
+          ERROR_MESSAGE_SERVICE_UNAVAILABLE,
+        ]}
+        content={ERROR_MESSAGE_PLEASE_TRY_AGAIN}
+      />
     );
   }
   if (isQuizEnd) {
