@@ -28,6 +28,7 @@ import {
 import SideMenu from './components/side-menu';
 import IsSideMenuVisibleContext from './context';
 import QuestionBuilderPage from './pages/question-builder-page';
+import ErrorPage from './pages/error-page';
 
 const hasFilledOutForm = () => localStorage.getItem(LOCAL_STORAGE_UNIT_KEY)
   && localStorage.getItem(LOCAL_STORAGE_UNIT_ID_KEY)
@@ -61,6 +62,7 @@ const App: React.FC = (): ReactElement => {
                   <Route path={PATH_QUESTION_BUILDER} exact>
                     <Redirect to={`${PATH_QUESTION_BUILDER + PATH_DIVISIONS}/0/brigade`} />
                   </Route>
+                  <Route path="*" component={ErrorPage} />
                 </Switch>
               ) : (
                 <Switch>
