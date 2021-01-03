@@ -25,6 +25,9 @@ import {
   DELETE_UNIT_BUTTON_DELETE,
   DELETE_UNIT_CONFIRM_MESSAGE,
   DELETE_UNIT_TITLE,
+  ERROR_MESSAGE_INVALID_ROUTE,
+  ERROR_MESSAGE_PLEASE_TRY_AGAIN,
+  ERROR_MESSAGE_SERVICE_UNAVAILABLE,
   FETCH_UNITS_ERROR_MESSAGE,
   LOADER_SIZE,
   NAVIGATION_PATH_SEPARATOR,
@@ -273,9 +276,15 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
   }
   if (hasFetchError) {
     return (
-      <Message negative>
-        <Message.Header>{FETCH_UNITS_ERROR_MESSAGE}</Message.Header>
-      </Message>
+      <Message
+        negative
+        header={FETCH_UNITS_ERROR_MESSAGE}
+        list={[
+          ERROR_MESSAGE_INVALID_ROUTE,
+          ERROR_MESSAGE_SERVICE_UNAVAILABLE,
+        ]}
+        content={ERROR_MESSAGE_PLEASE_TRY_AGAIN}
+      />
     );
   }
   return (

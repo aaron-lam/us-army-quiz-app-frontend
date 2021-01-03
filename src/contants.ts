@@ -30,7 +30,7 @@ export const PATH_QUESTION_BUILDER = '/questionbuilder';
 export const PATH_DIVISIONS = '/divisions';
 export const PATH_USER_INFO = '/userinfo';
 export const PATH_DELETE_UNIT = '/delete';
-export const API_URL = 'https://umts.live';
+export const API_URL = 'https://umt.live';
 export const API_URL_PATH_UNITS = '/units';
 export const API_URL_PATH_QUESTIONS = '/questions';
 export const LOCAL_STORAGE_LAST_NAME_KEY = 'lastName';
@@ -44,6 +44,9 @@ export const COMPANY = 'company';
 export const BATTALION = 'battalion';
 export const BRIGADE = 'brigade';
 export const DIVISION = 'division';
+export const ERROR_MESSAGE_INVALID_ROUTE = 'The URL you entered is invalid.';
+export const ERROR_MESSAGE_SERVICE_UNAVAILABLE = 'The service is currently unavailable.';
+export const ERROR_MESSAGE_PLEASE_TRY_AGAIN = 'Please refresh the page and try again.';
 
 /**
  * Side Menu
@@ -73,8 +76,8 @@ export const USER_FORM_DESCRIPTION = 'Welcome! Before playing the quiz, please f
 export const PLACEHOLDER_LAST_NAME = 'Please enter your Last Name';
 export const PLACEHOLDER_DROP_DOWN = 'Please enter your unit: ';
 export const LAST_NAME_INVALID_MESSAGE = 'Last Name can only contains alphabets.';
-export const FETCH_DROPDOWN_DATA_ERROR_MESSAGE = 'Some errors occurred while loading the dropdown list. '
-  + 'Please refresh the page and try again.';
+export const FETCH_DROPDOWN_DATA_ERROR_MESSAGE = `Some errors occurred while loading the dropdown list. 
+  ${ERROR_MESSAGE_PLEASE_TRY_AGAIN}`;
 export const USER_FORM_BUTTON_TEXT_SUBMIT = 'Submit';
 
 /**
@@ -114,8 +117,8 @@ export const BUTTON_END_QUIZ_COLOR = 'grey';
 export const MESSAGE_ANSWER_CORRECT = 'Awesome! Score +1';
 export const MESSAGE_ANSWER_WRONG = 'That\'s incorrect.. Score -1';
 export const TOAST_SKIP_QUESTION = 'Skipped the question. Score -1';
-export const FETCH_QUESTIONS_ERROR_MESSAGE = 'Some errors occurred while loading the questions. '
-  + 'Please refresh the page and try again.';
+export const FETCH_QUESTIONS_ERROR_MESSAGE = `Some errors occurred while loading the questions. 
+  ${ERROR_MESSAGE_PLEASE_TRY_AGAIN}`;
 
 /**
  * Congrats Page
@@ -151,8 +154,7 @@ export const BUTTON_TEXT_SAVE = 'Save';
 export const BUTTON_TEXT_EDIT = 'Edit';
 export const PLACEHOLDER_ID = -1;
 export const NAVIGATION_PATH_SEPARATOR = ' > ';
-export const FETCH_UNITS_ERROR_MESSAGE = 'Some errors occurred while loading the units. '
-  + 'Please refresh the page and try again.';
+export const FETCH_UNITS_ERROR_MESSAGE = 'Some errors occurred while loading the units. It might be:';
 export const TOAST_ERROR_MESSAGE_UPDATE_UNIT = 'Failed to update the unit name. Please try again.';
 export const TOAST_ERROR_MESSAGE_DELETE_UNIT = 'Failed to delete the unit. Please try again.';
 export const TOAST_ERROR_MESSAGE_EMPTY_UNIT_NAME = 'Unit name cannot be empty. Please try again.';
