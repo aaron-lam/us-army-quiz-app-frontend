@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import {
   Button, ButtonProps, Form, Header, Loader, Radio,
 } from 'semantic-ui-react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   MESSAGE_ANSWER_CORRECT,
@@ -24,13 +24,13 @@ import {
   FOOTER_MARGIN,
   BUTTON_WIDTH_DEFAULT,
   FONT_SIZE_MEDIUM,
-  PATH_QUIZ,
   PRIMARY_COLOR,
   MINIMUM_QUESTION_CAPACITY,
   API_URL,
   LOCAL_STORAGE_UNIT_ID_KEY,
   NUM_OF_QUESTIONS_TO_FETCH,
 } from '../contants';
+import CongratsPage from './congratsPage';
 
 const HeaderContainer = styled.div`
   flex: 1;
@@ -88,6 +88,7 @@ const QuizPage: React.FC = (): ReactElement => {
   const [hasChooseAnswer, setHasChooseAnswer] = useState<boolean>(false);
   const [hasSubmitAnswer, setHasSubmitAnswer] = useState<boolean>(false);
   const [requestData, setRequestData] = useState<QuestionInfo[]>([]);
+  const [isQuizEnd, setIsQuizEnd] = useState<boolean>(false);
 
   const { armyUnitsQuizType }: { armyUnitsQuizType: string } = useParams();
 
@@ -144,6 +145,10 @@ const QuizPage: React.FC = (): ReactElement => {
     }
   };
 
+  const onClickEndQuiz = () => {
+    setIsQuizEnd(true);
+  };
+
   const onClickSubmit = () => {
     if (hasSubmitAnswer) {
       goToNextQuestion();
@@ -156,6 +161,11 @@ const QuizPage: React.FC = (): ReactElement => {
   if (isLoading) {
     return (
       <Loader size="massive" active />
+    );
+  }
+  if (isQuizEnd) {
+    return (
+      <CongratsPage score={score} />
     );
   }
   return (
@@ -212,7 +222,7 @@ const QuizPage: React.FC = (): ReactElement => {
             </MediumButton>
           </ButtonsContainer>
           {/* TODO: Should navigate to user statistic page instead of quiz selections page. */}
-          <Button as={Link} to={PATH_QUIZ} basic color={BUTTON_END_QUIZ_COLOR}>
+          <Button onClick={onClickEndQuiz} basic color={BUTTON_END_QUIZ_COLOR}>
             {BUTTON_END_QUIZ_TEXT}
           </Button>
           {/* Give some margins to footer */}
