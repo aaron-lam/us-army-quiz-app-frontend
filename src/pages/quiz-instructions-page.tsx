@@ -5,7 +5,7 @@ import {
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  BUTTON_DEFAULT_COLOR,
+  BUTTON_PRIMARY_COLOR,
   FONT_SIZE_MEDIUM,
   LEVEL_LABEL,
   MARGIN_BETWEEN_PARAGRAPH,
@@ -52,7 +52,7 @@ const QuizInstructionPage: React.FC = (): ReactElement => {
           <Button
             as={Link}
             to={`${PATH_QUIZ}/${armyUnitsQuizType}`}
-            className={BUTTON_DEFAULT_COLOR}
+            className={BUTTON_PRIMARY_COLOR}
           >
             Start
           </Button>

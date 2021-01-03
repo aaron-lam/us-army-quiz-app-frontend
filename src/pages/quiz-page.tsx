@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import {
   Button, ButtonProps, Form, Header, Loader, Message, Radio,
 } from 'semantic-ui-react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   MESSAGE_ANSWER_CORRECT,
@@ -21,10 +21,8 @@ import {
   RADIO_WRONG_COLOR,
   QUESTION,
   BUTTON_END_QUIZ_COLOR,
-  FOOTER_MARGIN,
   BUTTON_WIDTH_DEFAULT,
   FONT_SIZE_MEDIUM,
-  PATH_QUIZ,
   PRIMARY_COLOR,
   MINIMUM_QUESTION_CAPACITY,
   API_URL,
@@ -32,8 +30,9 @@ import {
   NUM_OF_QUESTIONS_TO_FETCH,
   LOADER_SIZE,
   API_URL_PATH_QUESTIONS,
-  FETCH_QUESTIONS_ERROR_MESSAGE,
+  FETCH_QUESTIONS_ERROR_MESSAGE, MARGIN_DEFAULT,
 } from '../contants';
+import CongratsPage from './congrats-page';
 
 const HeaderContainer = styled.div`
   flex: 1;
@@ -98,6 +97,7 @@ const QuizPage: React.FC = (): ReactElement => {
   const [hasChooseAnswer, setHasChooseAnswer] = useState<boolean>(false);
   const [hasSubmitAnswer, setHasSubmitAnswer] = useState<boolean>(false);
   const [requestData, setRequestData] = useState<QuestionInfo[]>([]);
+  const [isQuizEnd, setIsQuizEnd] = useState<boolean>(false);
 
   const { armyUnitsQuizType }: { armyUnitsQuizType: string } = useParams();
 
@@ -155,6 +155,10 @@ const QuizPage: React.FC = (): ReactElement => {
     }
   };
 
+  const onClickEndQuiz = () => {
+    setIsQuizEnd(true);
+  };
+
   const onClickSubmit = () => {
     if (hasSubmitAnswer) {
       goToNextQuestion();
@@ -169,6 +173,11 @@ const QuizPage: React.FC = (): ReactElement => {
       <Message negative>
         <Message.Header>{FETCH_QUESTIONS_ERROR_MESSAGE}</Message.Header>
       </Message>
+    );
+  }
+  if (isQuizEnd) {
+    return (
+      <CongratsPage score={score} />
     );
   }
   return (
@@ -231,12 +240,11 @@ const QuizPage: React.FC = (): ReactElement => {
               {hasSubmitAnswer ? BUTTON_NEXT_TEXT : BUTTON_SUBMIT_TEXT}
             </MediumButton>
           </ButtonsContainer>
-          {/* TODO: Should navigate to user statistic page instead of quiz selections page. */}
-          <Button as={Link} to={PATH_QUIZ} basic color={BUTTON_END_QUIZ_COLOR}>
+          <Button onClick={onClickEndQuiz} basic color={BUTTON_END_QUIZ_COLOR}>
             {BUTTON_END_QUIZ_TEXT}
           </Button>
           {/* Give some margins to footer */}
-          <div style={{ margin: FOOTER_MARGIN }} />
+          <div style={{ margin: MARGIN_DEFAULT }} />
         </FooterContainer>
       </FlexContainer>
     </div>

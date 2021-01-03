@@ -16,6 +16,8 @@ export const TOAST_CONFIG_NO_AUTO_CLOSE: ToastOptions = { ...TOAST_CONFIG_DEFAUL
  * Global
  */
 export const BUTTON_WIDTH_DEFAULT = 100;
+export const BUTTON_WIDTH_LARGE = 200;
+export const MARGIN_DEFAULT = 12;
 export const FONT_SIZE_MEDIUM = 20;
 export const FONT_SIZE_LARGE = 24;
 export const PRIMARY_COLOR = 'green';
@@ -35,7 +37,8 @@ export const LOCAL_STORAGE_LAST_NAME_KEY = 'lastName';
 export const LOCAL_STORAGE_UNIT_ID_KEY = 'unitId';
 export const LOCAL_STORAGE_UNIT_KEY = 'unit';
 export const LOCAL_STORAGE_UNIT_TYPE_KEY = 'unitType';
-export const BUTTON_DEFAULT_COLOR = 'primary';
+export const BUTTON_PRIMARY_COLOR = 'primary';
+export const BUTTON_SECONDARY_COLOR = 'secondary';
 export const LOADER_SIZE = 'massive';
 export const COMPANY = 'company';
 export const BATTALION = 'battalion';
@@ -111,9 +114,17 @@ export const BUTTON_END_QUIZ_COLOR = 'grey';
 export const MESSAGE_ANSWER_CORRECT = 'Awesome! Score +1';
 export const MESSAGE_ANSWER_WRONG = 'That\'s incorrect.. Score -1';
 export const TOAST_SKIP_QUESTION = 'Skipped the question. Score -1';
-export const FOOTER_MARGIN = 12;
 export const FETCH_QUESTIONS_ERROR_MESSAGE = 'Some errors occurred while loading the questions. '
   + 'Please refresh the page and try again.';
+
+/**
+ * Congrats Page
+ */
+export const SCORE_SUMMARY_LABEL = 'Here is your score:';
+export const ICON_NAME_CHECK = 'check circle';
+export const CONGRATS_PAGE_ICON_SIZE = 'massive';
+export const BUTTON_TEXT_RETAKE_QUIZ = 'Retake Quiz';
+export const BUTTON_TEXT_HOME = 'Home';
 
 /**
  * Profile Page
