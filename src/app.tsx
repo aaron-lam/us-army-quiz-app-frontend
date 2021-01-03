@@ -16,7 +16,7 @@ import {
   LOCAL_STORAGE_LAST_NAME_KEY,
   LOCAL_STORAGE_UNIT_ID_KEY,
   LOCAL_STORAGE_UNIT_KEY,
-  PATH_DIVISIONS,
+  PATH_DIVISION,
   PATH_INSTRUCTIONS,
   PATH_PARAM_QUIZ_TYPE,
   PATH_PROFILE,
@@ -57,9 +57,9 @@ const App: React.FC = (): ReactElement => {
                   />
                   <Route path={PATH_QUIZ + PATH_PARAM_QUIZ_TYPE} exact component={QuizPage} />
                   <Route path={PATH_PROFILE} exact component={ProfilePage} />
-                  <Route path={`${PATH_QUESTION_BUILDER + PATH_DIVISIONS}/0/brigade`} component={QuestionBuilderPage} />
+                  <Route path={PATH_QUESTION_BUILDER + PATH_DIVISION} component={QuestionBuilderPage} />
                   <Route path={PATH_QUESTION_BUILDER} exact>
-                    <Redirect to={`${PATH_QUESTION_BUILDER + PATH_DIVISIONS}/0/brigade`} />
+                    <Redirect to={PATH_QUESTION_BUILDER + PATH_DIVISION} />
                   </Route>
                 </Switch>
               ) : (

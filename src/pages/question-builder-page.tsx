@@ -25,6 +25,9 @@ import {
   DELETE_UNIT_BUTTON_DELETE,
   DELETE_UNIT_CONFIRM_MESSAGE,
   DELETE_UNIT_TITLE,
+  ERROR_MESSAGE_INVALID_ROUTE,
+  ERROR_MESSAGE_PLEASE_TRY_AGAIN,
+  ERROR_MESSAGE_SERVICE_UNAVAILABLE,
   FETCH_UNITS_ERROR_MESSAGE,
   LOADER_SIZE,
   NAVIGATION_PATH_SEPARATOR,
@@ -80,9 +83,9 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
     return unitHierarchiesIds;
   };
 
-  const getParentUnitId = () => {
+  const getParentUnitId = (): string => {
     const unitHierarchiesIds = getUnitHierarchiesIds();
-    return unitHierarchiesIds[unitHierarchiesIds.length - 1];
+    return unitHierarchiesIds[unitHierarchiesIds.length - 1] || PLACEHOLDER_ID.toString();
   };
 
   const getCurrentUnit = () => {
@@ -91,7 +94,7 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
   };
 
   const fetchUnits = () => {
-    const unitsFetchUrl = `${API_URL}${API_URL_PATH_UNITS}/${getCurrentUnit()}?${new URLSearchParams({
+    const unitsFetchUrl = `${API_URL}${API_URL_PATH_UNITS}?${new URLSearchParams({
       parentId: getParentUnitId(),
     })}`;
     setIsLoading(true);
@@ -109,10 +112,10 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
   };
 
   const fetchUnit = (id: string) => {
-    const unitsFetchUrl = `${API_URL}${API_URL_PATH_UNITS}?${new URLSearchParams({ id })}`;
-    return fetch(unitsFetchUrl)
+    const unitFetchUrl = `${API_URL}${API_URL_PATH_UNITS}?${new URLSearchParams({ id })}`;
+    return fetch(unitFetchUrl)
       .then((response) => response.json())
-      .then((data) => data.unit.name)
+      .then((data) => data.units[0].name)
       .catch(() => setHasFetchError(true));
   };
 
@@ -273,9 +276,15 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
   }
   if (hasFetchError) {
     return (
-      <Message negative>
-        <Message.Header>{FETCH_UNITS_ERROR_MESSAGE}</Message.Header>
-      </Message>
+      <Message
+        negative
+        header={FETCH_UNITS_ERROR_MESSAGE}
+        list={[
+          ERROR_MESSAGE_INVALID_ROUTE,
+          ERROR_MESSAGE_SERVICE_UNAVAILABLE,
+        ]}
+        content={ERROR_MESSAGE_PLEASE_TRY_AGAIN}
+      />
     );
   }
   return (
