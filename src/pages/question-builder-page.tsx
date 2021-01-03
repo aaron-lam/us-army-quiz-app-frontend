@@ -83,9 +83,9 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
     return unitHierarchiesIds;
   };
 
-  const getParentUnitId = () => {
+  const getParentUnitId = (): string => {
     const unitHierarchiesIds = getUnitHierarchiesIds();
-    return unitHierarchiesIds[unitHierarchiesIds.length - 1];
+    return unitHierarchiesIds[unitHierarchiesIds.length - 1] || PLACEHOLDER_ID.toString();
   };
 
   const getCurrentUnit = () => {
@@ -94,7 +94,7 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
   };
 
   const fetchUnits = () => {
-    const unitsFetchUrl = `${API_URL}${API_URL_PATH_UNITS}/${getCurrentUnit()}?${new URLSearchParams({
+    const unitsFetchUrl = `${API_URL}${API_URL_PATH_UNITS}?${new URLSearchParams({
       parentId: getParentUnitId(),
     })}`;
     setIsLoading(true);
@@ -112,10 +112,10 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
   };
 
   const fetchUnit = (id: string) => {
-    const unitsFetchUrl = `${API_URL}${API_URL_PATH_UNITS}?${new URLSearchParams({ id })}`;
-    return fetch(unitsFetchUrl)
+    const unitFetchUrl = `${API_URL}${API_URL_PATH_UNITS}?${new URLSearchParams({ id })}`;
+    return fetch(unitFetchUrl)
       .then((response) => response.json())
-      .then((data) => data.unit.name)
+      .then((data) => data.units[0].name)
       .catch(() => setHasFetchError(true));
   };
 
