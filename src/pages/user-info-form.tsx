@@ -7,7 +7,7 @@ import {
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  API_URL, API_URL_PATH_UNITS,
+  API_URL, API_URL_PATH_UNITS, ERROR_MESSAGE_RESPONSE_NOT_SUCCESS,
   FETCH_DROPDOWN_DATA_ERROR_MESSAGE,
   LAST_NAME_INVALID_MESSAGE,
   LOCAL_STORAGE_LAST_NAME_KEY,
@@ -21,6 +21,7 @@ import {
   USER_FORM_DESCRIPTION,
 } from '../contants';
 import { Unit } from '../types';
+import isNotSuccess from '../utils/api';
 
 const FlexContainer = styled.div`
   display: flex;
@@ -53,7 +54,12 @@ const UserInfoForm: React.FC = (): ReactElement => {
 
   useEffect(() => {
     fetch(API_URL + API_URL_PATH_UNITS)
-      .then((response) => response.json())
+      .then((response) => {
+        if (isNotSuccess(response.status)) {
+          throw new Error(ERROR_MESSAGE_RESPONSE_NOT_SUCCESS);
+        }
+        return response.json();
+      })
       .then((data) => {
         setDropdownList(
           data.units.map((unitObject: Unit) => ({
