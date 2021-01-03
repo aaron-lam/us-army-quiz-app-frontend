@@ -3,7 +3,7 @@
 *******************************/
 
 @primaryColor: #228B22;
-@secondaryColor: #F0E68C;
+@secondaryColor: #EADC5E;
 @pageBackground: #FFFFF0;
 @red: #FC9B86;
 @green: #228B22;

@@ -24,6 +24,7 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'import/extensions': [
       'error',
@@ -38,9 +39,11 @@ module.exports = {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'jsx-a11y/label-has-associated-control': 'off',
     'max-len': ['error', { code: 120 }],
+    'no-console': 'off',
     'no-use-before-define': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/no-array-index-key': 'off',
+    'linebreak-style': 'off',
   },
   overrides: [
     {

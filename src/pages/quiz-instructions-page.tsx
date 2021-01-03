@@ -5,7 +5,7 @@ import {
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  BUTTON_DEFAULT_COLOR,
+  BUTTON_PRIMARY_COLOR,
   FONT_SIZE_MEDIUM,
   LEVEL_LABEL,
   MARGIN_BETWEEN_PARAGRAPH,
@@ -18,7 +18,6 @@ import {
 const FlexContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 60vh;
 `;
 
 const ButtonContainer = styled.div`
@@ -39,7 +38,7 @@ const QuizInstructionPage: React.FC = (): ReactElement => {
   return (
     <FlexContainer>
       <Container text>
-        <Header as="h2">{`${LEVEL_LABEL} ${armyUnitsQuizType === 'battalion' ? 1 : 2}`}</Header>
+        <Header as="h2">{`${LEVEL_LABEL} ${armyUnitsQuizType}`}</Header>
         <Paragraph>
           {`${QUIZ_INSTRUCTION_PARAGRAPH_ONE} ${armyUnitsQuizType}.`}
         </Paragraph>
@@ -52,8 +51,8 @@ const QuizInstructionPage: React.FC = (): ReactElement => {
         <ButtonContainer>
           <Button
             as={Link}
-            to={PATH_QUIZ + armyUnitsQuizType}
-            className={BUTTON_DEFAULT_COLOR}
+            to={`${PATH_QUIZ}/${armyUnitsQuizType}`}
+            className={BUTTON_PRIMARY_COLOR}
           >
             Start
           </Button>
