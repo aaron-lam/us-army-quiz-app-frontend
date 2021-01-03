@@ -227,7 +227,7 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
   const editOnClick = (unitId: number) => {
     // clicked save button
     if (isEditingUnit) {
-      if (newUnitName.length === 0) {
+      if (newUnitName.trim().length === 0) {
         toast.error(TOAST_ERROR_MESSAGE_EMPTY_UNIT_NAME, TOAST_CONFIG_LONG_WAIT);
         return;
       }
