@@ -1,6 +1,10 @@
 import React, { ReactElement } from 'react';
 import { Message } from 'semantic-ui-react';
 import styled from 'styled-components';
+import {
+  ERROR_MESSAGE_CHECK_LINK,
+  ERROR_MESSAGE_INVALID_ROUTE,
+} from '../contants';
 
 const FlexContainer = styled.div`
   display: flex;
@@ -11,10 +15,9 @@ const FlexContainer = styled.div`
 
 const ErrorPage: React.FC = (): ReactElement => (
   <FlexContainer>
-
     <Message negative>
-      <Message.Header>The URL you entered is invalid</Message.Header>
-      <p>Please check your link and retry again.</p>
+      <Message.Header>{ERROR_MESSAGE_INVALID_ROUTE}</Message.Header>
+      <Message.Content>{ERROR_MESSAGE_CHECK_LINK}</Message.Content>
     </Message>
   </FlexContainer>
 );

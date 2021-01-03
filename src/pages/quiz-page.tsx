@@ -16,7 +16,7 @@ import {
   TOAST_SKIP_QUESTION,
   LEVEL_LABEL,
   SCORE_LABEL,
-  TOAST_CONFIG_NO_AUTO_CLOSE,
+  TOAST_CONFIG_LONG_WAIT,
   RADIO_CORRECT_COLOR,
   RADIO_WRONG_COLOR,
   QUESTION,
@@ -30,9 +30,15 @@ import {
   NUM_OF_QUESTIONS_TO_FETCH,
   LOADER_SIZE,
   API_URL_PATH_QUESTIONS,
-  FETCH_QUESTIONS_ERROR_MESSAGE, MARGIN_DEFAULT,
+  FETCH_QUESTIONS_ERROR_MESSAGE,
+  MARGIN_DEFAULT,
+  ERROR_MESSAGE_RESPONSE_NOT_SUCCESS,
+  ERROR_MESSAGE_INVALID_ROUTE,
+  ERROR_MESSAGE_SERVICE_UNAVAILABLE,
+  ERROR_MESSAGE_PLEASE_TRY_AGAIN,
 } from '../contants';
 import CongratsPage from './congrats-page';
+import isNotSuccess from '../utils/api';
 
 const HeaderContainer = styled.div`
   flex: 1;
@@ -109,7 +115,12 @@ const QuizPage: React.FC = (): ReactElement => {
 
   const fetchQuestions = () => {
     fetch(questionsFetchURL)
-      .then((response) => response.json())
+      .then((response) => {
+        if (isNotSuccess(response.status)) {
+          throw new Error(ERROR_MESSAGE_RESPONSE_NOT_SUCCESS);
+        }
+        return response.json();
+      })
       .then((data) => {
         setRequestData(requestData.concat(data));
         setIsLoading(false);
@@ -150,7 +161,7 @@ const QuizPage: React.FC = (): ReactElement => {
   const onClickSkip = () => {
     if (!hasSubmitAnswer) {
       setScore(score - 1);
-      toast.warn(TOAST_SKIP_QUESTION, TOAST_CONFIG_NO_AUTO_CLOSE);
+      toast.warn(TOAST_SKIP_QUESTION, TOAST_CONFIG_LONG_WAIT);
       goToNextQuestion();
     }
   };
@@ -170,9 +181,15 @@ const QuizPage: React.FC = (): ReactElement => {
 
   if (hasFetchError) {
     return (
-      <Message negative>
-        <Message.Header>{FETCH_QUESTIONS_ERROR_MESSAGE}</Message.Header>
-      </Message>
+      <Message
+        negative
+        header={FETCH_QUESTIONS_ERROR_MESSAGE}
+        list={[
+          ERROR_MESSAGE_INVALID_ROUTE,
+          ERROR_MESSAGE_SERVICE_UNAVAILABLE,
+        ]}
+        content={ERROR_MESSAGE_PLEASE_TRY_AGAIN}
+      />
     );
   }
   if (isQuizEnd) {
