@@ -10,7 +10,7 @@ export const TOAST_CONFIG_DEFAULT: ToastOptions = {
   progress: undefined,
 };
 
-export const TOAST_CONFIG_NO_AUTO_CLOSE: ToastOptions = { ...TOAST_CONFIG_DEFAULT, autoClose: false };
+export const TOAST_CONFIG_LONG_WAIT: ToastOptions = { ...TOAST_CONFIG_DEFAULT, autoClose: 5000 };
 
 /**
  * Global
@@ -47,6 +47,7 @@ export const DIVISION = 'division';
 export const ERROR_MESSAGE_INVALID_ROUTE = 'The URL you entered is invalid.';
 export const ERROR_MESSAGE_SERVICE_UNAVAILABLE = 'The service is currently unavailable.';
 export const ERROR_MESSAGE_PLEASE_TRY_AGAIN = 'Please refresh the page and try again.';
+export const ERROR_MESSAGE_RESPONSE_NOT_SUCCESS = 'Response not success.';
 
 /**
  * Side Menu
@@ -155,6 +156,7 @@ export const BUTTON_TEXT_EDIT = 'Edit';
 export const PLACEHOLDER_ID = -1;
 export const NAVIGATION_PATH_SEPARATOR = ' > ';
 export const FETCH_UNITS_ERROR_MESSAGE = 'Some errors occurred while loading the units. It might be:';
+export const TOAST_ERROR_MESSAGE_CREATE_UNIT = 'Failed to create the unit. Please try again.';
 export const TOAST_ERROR_MESSAGE_UPDATE_UNIT = 'Failed to update the unit name. Please try again.';
 export const TOAST_ERROR_MESSAGE_DELETE_UNIT = 'Failed to delete the unit. Please try again.';
 export const TOAST_ERROR_MESSAGE_EMPTY_UNIT_NAME = 'Unit name cannot be empty. Please try again.';
