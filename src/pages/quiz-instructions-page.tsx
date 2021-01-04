@@ -11,7 +11,6 @@ import {
   MARGIN_BETWEEN_PARAGRAPH,
   PATH_QUIZ,
   QUIZ_INSTRUCTION_PARAGRAPH_ONE,
-  QUIZ_INSTRUCTION_PARAGRAPH_THREE,
   QUIZ_INSTRUCTION_PARAGRAPH_TWO,
 } from '../contants';
 
@@ -40,13 +39,10 @@ const QuizInstructionPage: React.FC = (): ReactElement => {
       <Container text>
         <Header as="h2">{`${LEVEL_LABEL} ${armyUnitsQuizType}`}</Header>
         <Paragraph>
-          {`${QUIZ_INSTRUCTION_PARAGRAPH_ONE} ${armyUnitsQuizType}.`}
+          {QUIZ_INSTRUCTION_PARAGRAPH_ONE}
         </Paragraph>
         <Paragraph>
           {QUIZ_INSTRUCTION_PARAGRAPH_TWO}
-        </Paragraph>
-        <Paragraph>
-          {QUIZ_INSTRUCTION_PARAGRAPH_THREE}
         </Paragraph>
         <ButtonContainer>
           <Button

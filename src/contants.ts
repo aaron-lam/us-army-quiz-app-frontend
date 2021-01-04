@@ -84,20 +84,16 @@ export const USER_FORM_BUTTON_TEXT_SUBMIT = 'Submit';
 /**
  * Quiz Selections Page
  */
-export const QUIZ_SELECTIONS_CARD_DESCRIPTION = 'Guess which company belongs to the corresponding';
+export const QUIZ_SELECTIONS_CARD_DESCRIPTION = 'Guess which company belongs to the battalion under your';
 export const PLACEHOLDER_LEVEL = -1;
 
 /**
  * Quiz Instructions Page
  */
-export const QUIZ_INSTRUCTION_PARAGRAPH_ONE = 'There is unlimited question in total. '
-  + 'Your goal is to get as much score as possible. '
-  + 'You need to guess which company belongs to the corresponding';
-export const QUIZ_INSTRUCTION_PARAGRAPH_TWO = 'You get 1 point when you answer a question correctly. '
-  + 'If you skip a question or answer a question incorrectly, 1 point will be deducted. '
-  + 'There are unlimited question in the quiz. '
-  + 'Feel free to press “End Quiz” to finish the quiz when you finished.';
-export const QUIZ_INSTRUCTION_PARAGRAPH_THREE = 'Press the “Start” button to begin now!';
+export const QUIZ_INSTRUCTION_PARAGRAPH_ONE = 'You get 1 point when you answer a question correctly. '
+  + 'If you skip a question or answer a question incorrectly, 1 point will be reduced. '
+  + 'You can continue to play until you feel done.  You can press “End Quiz” anytime, and your score will be shown.';
+export const QUIZ_INSTRUCTION_PARAGRAPH_TWO = 'Press the “Start” button to begin now!';
 export const MARGIN_BETWEEN_PARAGRAPH = 28;
 
 /**
