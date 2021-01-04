@@ -14,7 +14,9 @@ import {
   API_URL_PATH_UNITS,
   BATTALION,
   BRIGADE,
+  BUTTON_SECONDARY_COLOR,
   BUTTON_TEXT_ADD_UNIT,
+  BUTTON_TEXT_CANCEL,
   BUTTON_TEXT_DELETE,
   BUTTON_TEXT_EDIT,
   BUTTON_TEXT_EDIT_MODE,
@@ -24,9 +26,11 @@ import {
   DELETE_UNIT_BUTTON_CANCEL,
   DELETE_UNIT_BUTTON_DELETE,
   DELETE_UNIT_CONFIRM_MESSAGE,
-  DELETE_UNIT_TITLE, DIVISION,
+  DELETE_UNIT_TITLE,
+  DIVISION,
   ERROR_MESSAGE_INVALID_ROUTE,
-  ERROR_MESSAGE_PLEASE_TRY_AGAIN, ERROR_MESSAGE_RESPONSE_NOT_SUCCESS,
+  ERROR_MESSAGE_PLEASE_TRY_AGAIN,
+  ERROR_MESSAGE_RESPONSE_NOT_SUCCESS,
   ERROR_MESSAGE_SERVICE_UNAVAILABLE,
   FETCH_UNITS_ERROR_MESSAGE,
   LOADER_SIZE,
@@ -34,8 +38,11 @@ import {
   NOT_AUTHORIZED_MESSAGE,
   PLACEHOLDER_ID,
   PRIMARY_COLOR,
-  TOAST_CONFIG_LONG_WAIT, TOAST_ERROR_MESSAGE_CREATE_UNIT,
-  TOAST_ERROR_MESSAGE_DELETE_UNIT, TOAST_ERROR_MESSAGE_EMPTY_UNIT_NAME,
+  TOAST_CONFIG_LONG_WAIT,
+  TOAST_ERROR_MESSAGE_CREATE_UNIT,
+  TOAST_ERROR_MESSAGE_DELETE_UNIT,
+  TOAST_ERROR_MESSAGE_EMPTY_UNIT_NAME,
+  TOAST_ERROR_MESSAGE_UNIT_NAME_TOO_LONG,
   TOAST_ERROR_MESSAGE_UPDATE_UNIT,
 } from '../contants';
 import { Unit } from '../types';
@@ -224,11 +231,15 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
     fetchUnits();
   }, [urlPath]);
 
-  const editOnClick = (unitId: number) => {
+  const editOnClick = (unitId: number, unitName: string) => {
     // clicked save button
     if (isEditingUnit) {
       if (newUnitName.trim().length === 0) {
         toast.error(TOAST_ERROR_MESSAGE_EMPTY_UNIT_NAME, TOAST_CONFIG_LONG_WAIT);
+        return;
+      }
+      if (newUnitName.trim().length >= 255) {
+        toast.error(TOAST_ERROR_MESSAGE_UNIT_NAME_TOO_LONG, TOAST_CONFIG_LONG_WAIT);
         return;
       }
       // the saving unit is created in new, or else it is already existed in database
@@ -237,8 +248,8 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
       } else {
         updateUnitName(unitId);
       }
-      setNewUnitName('');
     }
+    setNewUnitName(isEditingUnit ? '' : unitName);
     setIsEditingUnit(!isEditingUnit);
     setEditItemId(!isEditingUnit ? unitId : PLACEHOLDER_ID);
   };
@@ -247,7 +258,19 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
 
   const isDisplayingLowestUnitLevel = () => getChildUnit() === '';
 
+  const isRowEditingInEditMode = (id: number) => isEditingUnit && editItemId === id;
+
   const deleteUnitOnClick = (unitId: number) => {
+    if (isRowEditingInEditMode(unitId)) {
+      // if editing item is newly created, we should pop off the new placeholder item from the list.
+      if (unitId === PLACEHOLDER_ID) {
+        unitList.pop();
+      }
+      setIsEditingUnit(false);
+      setEditItemId(-1);
+      setNewUnitName('');
+      return;
+    }
     confirmAlert({
       title: DELETE_UNIT_TITLE,
       message: DELETE_UNIT_CONFIRM_MESSAGE,
@@ -276,7 +299,7 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
       >
         <Button
           primary
-          onClick={() => editOnClick(id)}
+          onClick={() => editOnClick(id, name)}
           disabled={isEditingUnit && editItemId !== id}
         >
           {editItemId === id ? BUTTON_TEXT_SAVE : BUTTON_TEXT_EDIT}
@@ -287,11 +310,11 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
         style={{ visibility: isEditMode ? 'visible' : 'hidden' }}
       >
         <Button
-          negative
-          disabled={isEditingUnit}
+          className={isRowEditingInEditMode(id) ? BUTTON_SECONDARY_COLOR : 'negative'}
+          disabled={isEditingUnit && !isRowEditingInEditMode(id)}
           onClick={() => deleteUnitOnClick(id)}
         >
-          {BUTTON_TEXT_DELETE}
+          {isRowEditingInEditMode(id) ? BUTTON_TEXT_CANCEL : BUTTON_TEXT_DELETE}
         </Button>
       </List.Content>
       <List.Content>
@@ -301,6 +324,7 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
               ? (
                 <Input
                   onChange={inputOnChange}
+                  value={newUnitName}
                 />
               ) : (
                 <Button

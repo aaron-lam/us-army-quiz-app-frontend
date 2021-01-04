@@ -153,13 +153,15 @@ export const BUTTON_TEXT_ADD_UNIT = 'Add New Unit';
 export const BUTTON_TEXT_DELETE = 'Delete';
 export const BUTTON_TEXT_SAVE = 'Save';
 export const BUTTON_TEXT_EDIT = 'Edit';
+export const BUTTON_TEXT_CANCEL = 'Cancel';
 export const PLACEHOLDER_ID = -1;
 export const NAVIGATION_PATH_SEPARATOR = ' > ';
 export const FETCH_UNITS_ERROR_MESSAGE = 'Some errors occurred while loading the units. It might be:';
 export const TOAST_ERROR_MESSAGE_CREATE_UNIT = 'Failed to create the unit. Please try again.';
 export const TOAST_ERROR_MESSAGE_UPDATE_UNIT = 'Failed to update the unit name. Please try again.';
 export const TOAST_ERROR_MESSAGE_DELETE_UNIT = 'Failed to delete the unit. Please try again.';
-export const TOAST_ERROR_MESSAGE_EMPTY_UNIT_NAME = 'Unit name cannot be empty. Please try again.';
+export const TOAST_ERROR_MESSAGE_EMPTY_UNIT_NAME = 'Unit name cannot be empty.';
+export const TOAST_ERROR_MESSAGE_UNIT_NAME_TOO_LONG = 'Unit name contains too many characters. (>= 255 characters)';
 
 /**
  * Error Page
