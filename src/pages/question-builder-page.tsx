@@ -33,7 +33,7 @@ import {
   ERROR_MESSAGE_RESPONSE_NOT_SUCCESS,
   ERROR_MESSAGE_SERVICE_UNAVAILABLE,
   FETCH_UNITS_ERROR_MESSAGE,
-  LOADER_SIZE,
+  LOADER_SIZE, MARGIN_DEFAULT,
   NAVIGATION_PATH_SEPARATOR,
   NOT_AUTHORIZED_MESSAGE,
   PLACEHOLDER_ID,
@@ -231,6 +231,12 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
     fetchUnits();
   }, [urlPath]);
 
+  const backToNonEditingState = () => {
+    setIsEditingUnit(false);
+    setEditItemId(PLACEHOLDER_ID);
+    setNewUnitName('');
+  };
+
   const editOnClick = (unitId: number, unitName: string) => {
     // clicked save button
     if (isEditingUnit) {
@@ -240,6 +246,11 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
       }
       if (newUnitName.trim().length >= 255) {
         toast.error(TOAST_ERROR_MESSAGE_UNIT_NAME_TOO_LONG, TOAST_CONFIG_LONG_WAIT);
+        return;
+      }
+      // if the new unit name is same as unit name, treat the save button as cancel button
+      if (newUnitName === unitName) {
+        backToNonEditingState();
         return;
       }
       // the saving unit is created in new, or else it is already existed in database
@@ -266,9 +277,7 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
       if (unitId === PLACEHOLDER_ID) {
         unitList.pop();
       }
-      setIsEditingUnit(false);
-      setEditItemId(-1);
-      setNewUnitName('');
+      backToNonEditingState();
       return;
     }
     confirmAlert({
@@ -390,6 +399,8 @@ const QuestionBuilderPage: React.FC = (): ReactElement => {
             {renderListItems()}
           </List>
         )}
+      {/* Make some margin between the list and the bottom of the page */}
+      <div style={{ margin: MARGIN_DEFAULT }} />
     </div>
   );
 };
