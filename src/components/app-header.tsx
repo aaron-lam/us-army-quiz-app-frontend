@@ -1,12 +1,16 @@
 import React, { ReactElement, useContext } from 'react';
 import {
   Button,
-  Header, Icon, Segment,
+  Header,
+  Segment,
 } from 'semantic-ui-react';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
-  APP_HEADER, ICON_NAME_SIDEBAR, MARGIN_DEFAULT, PATH_USER_INFO,
+  APP_HEADER,
+  MARGIN_DEFAULT,
+  PATH_USER_INFO, SIDE_MENU_SIGN_OUT,
+  SIDEBAR_TITLE,
 } from '../contants';
 import IsSideMenuVisibleContext from '../context';
 
@@ -22,7 +26,7 @@ const HeaderSegment = styled(Segment)({
 
 const SidebarButton = styled(Button)({
   position: 'absolute',
-  left: 10,
+  left: MARGIN_DEFAULT,
 });
 
 const AppHeader: React.FC = (): ReactElement => {
@@ -38,11 +42,26 @@ const AppHeader: React.FC = (): ReactElement => {
             setIsSideMenuVisible(true);
           }}
         >
-          <Icon fitted name={ICON_NAME_SIDEBAR} />
+          {SIDEBAR_TITLE}
         </SidebarButton>
         <Header.Content style={{ margin: MARGIN_DEFAULT }}>
           {APP_HEADER}
         </Header.Content>
+        <Button
+          style={{
+            visibility: urlPath.includes(PATH_USER_INFO) ? 'hidden' : 'visible',
+            position: 'absolute',
+            right: MARGIN_DEFAULT,
+          }}
+          as={Link}
+          to={PATH_USER_INFO}
+          onClick={() => {
+            localStorage.clear();
+            window.location.reload();
+          }}
+        >
+          {SIDE_MENU_SIGN_OUT}
+        </Button>
       </Header>
     </HeaderSegment>
   );
