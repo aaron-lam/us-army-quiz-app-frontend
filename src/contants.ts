@@ -65,9 +65,6 @@ export const ICON_NAME_SIGN_OUT = 'sign out';
  * App Header
  */
 export const APP_HEADER = 'U.S. Army Units Quiz';
-export const APP_LOGO_HEIGHT = 48;
-export const APP_LOGO_URL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/'
-  + 'Logo_of_the_United_States_Army.svg/359px-Logo_of_the_United_States_Army.svg.png';
 export const ICON_NAME_SIDEBAR = 'sidebar';
 
 /**
