@@ -65,7 +65,7 @@ export const ICON_NAME_SIGN_OUT = 'sign out';
  * App Header
  */
 export const APP_HEADER = 'U.S. Army Units Quiz';
-export const ICON_NAME_SIDEBAR = 'sidebar';
+export const SIDEBAR_TITLE = 'Menu';
 
 /**
  * User Info Form
@@ -81,7 +81,7 @@ export const USER_FORM_BUTTON_TEXT_SUBMIT = 'Submit';
 /**
  * Quiz Selections Page
  */
-export const QUIZ_SELECTIONS_CARD_DESCRIPTION = 'Guess which company belongs to the battalion under your';
+export const QUIZ_SELECTIONS_CARD_DESCRIPTION = 'Guess which unit belongs to the battalion under your';
 export const PLACEHOLDER_LEVEL = -1;
 
 /**
